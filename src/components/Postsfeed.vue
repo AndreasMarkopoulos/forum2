@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import Post from "./post.vue"
+import Post from "./Post.vue"
 
 export default {
-  name: "postsfeed",
+  name: "Postsfeed",
   components: {
     Post
   }
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.postarea{
+.postarea {
   padding-top: 75px;
   display: flex;
   flex-direction: column;
