@@ -3,9 +3,9 @@
     <div class="logo">O</div>
     <ul class="options">
       <router-link class="subheader" to="/">Home</router-link>
+      <router-link v-if="nouser" to="/myfeed" class="subheader">My Feed</router-link>
       <router-link v-if="nouser" to="/myposts" class="subheader">My Posts</router-link>
-      <!--      <router-link to="/newpost" class="subheader" href="">New Post</router-link>-->
-      <!--      <router-link to="/explore" class="subheader" href="">Explore</router-link>-->
+
     </ul>
   </div>
 </template>
@@ -13,9 +13,18 @@
 <script setup>
 import {ref} from "vue";
 import {useUserStore} from "@/stores/UserStore";
+import {storeToRefs} from "pinia";
+
 
 const res = useUserStore();
-let nouser = ref(res.get());
+if (localStorage.getItem("userinfo")) {
+  res.yesUser()
+} else {
+  res.noUser()
+}
+const reactiveprops = storeToRefs(res)
+const nouser = reactiveprops.user
+
 
 </script>
 
@@ -39,7 +48,7 @@ export default {
   margin-top: 30px;
   cursor: pointer;
   user-select: none;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   text-align: center;
   font-weight: bolder;
   font-size: 70px;

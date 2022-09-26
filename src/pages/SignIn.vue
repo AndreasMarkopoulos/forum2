@@ -42,7 +42,6 @@ const login = async () => {
   if (user.password === usr.password) {
     nouser.yesUser();
     localStorage.setItem("userinfo", JSON.stringify(usr.username));
-    console.log(nouser.get())
     await router.push('/')
   } else {
     error.value = true;

@@ -1,6 +1,7 @@
 {
   "user": [
     {
+      "pic": "/src/assets/user3.svg",
       "username": "andreas",
       "email": "andreas@email.com",
       "password": "1234",
@@ -8,6 +9,7 @@
       "id": 1
     },
     {
+      "pic": "/src/assets/user1.svg",
       "username": "kostas",
       "email": "kostas@email.com",
       "password": "1234",
@@ -15,6 +17,7 @@
       "id": 2
     },
     {
+      "pic": "/src/assets/user2.svg",
       "username": "maria",
       "email": "maria@email.com",
       "password": "1234",
@@ -22,6 +25,7 @@
       "id": 3
     },
     {
+      "pic": "/src/assets/user4.svg",
       "username": "giorgos",
       "email": "giorgos@email.com",
       "password": "1234",
@@ -29,6 +33,7 @@
       "id": 4
     },
     {
+      "pic": "/src/assets/user2.svg",
       "username": "eleni",
       "email": "eleni@email.com",
       "password": "1234",
@@ -36,6 +41,7 @@
       "id": 5
     },
     {
+      "pic": "/src/assets/user2.svg",
       "username": "vasilis",
       "email": "vasilis@email.com",
       "password": "1234",
@@ -45,36 +51,36 @@
   ],
   "posts": [
     {
-      "id": 1,
       "user": "andreas",
-      "title": "To James Webb μας στέλνει την βαθύτερη εικόνα από το διάστημα",
-      "date": "4/8/2022",
-      "votes": "126",
-      "content": "Το διαστημικό τηλεσκόπιο James Webb της NASA κατέγραψε την πιο μακρινή και ευκρινέστερη υπέρυθρη εικόνα του σύμπαντος μέχρι σήμερα. \n\nΗ έγχρωμη εικόνα του σμήνος γαλαξιών SMACS 0723 εντυπωσιάζει με τις λεπτομέρειες που περιλαμβάνει. Σ' αυτή χιλιάδες γαλαξίες - συμπεριλαμβανομένων των πιο αμυδρών αντικειμένων που έχουν παρατηρηθεί ποτέ στο υπέρυθρο του φάσματος- έχουν εμφανιστεί στην θέα του Webb για πρώτη φορά. «Kύριε πρόεδρε, αν ακουμπούσατε έναν κόκκο άμμου στην άκρη του προτεταμένου σας χεριού, αυτό είναι το μέρος του Σύμπαντος που βλέπετε, ένα ψήγμα του\", ανέφερε ενδεικτικά ο επικεφαλής της NASA, Bill Nelson. στον Πρόεδρο των ΗΠΑ, κατά τη διάρκεια της ενημέρωσης.\n\nTο βαθύ πεδίο, που καταγράφηκε από την κάμερα εγγύς υπέρυθρης ακτινοβολίας (NIRCam) του Webb, είναι μια σύνθετη διαδικασία που αποτελείται από εικόνες σε διαφορετικά μήκη κύματος, συνολικού μήκους 12,5 ωρών – επιτυγχάνοντας βάθη σε υπέρυθρα μήκη κύματος πέρα από τα βαθύτερα πεδία που έχει φτάσει το διαστημικό τηλεσκόπιο Hubble, μια διαδικασία που χρειάστηκε εβδομάδες."
+      "pic": "/src/assets/user3.svg",
+      "title": "Electric Vehicles Could Rescue the US Power Grid",
+      "content": "Cars are no longer just modes of transportation; they are increasingly integrated into the larger energy infrastructure. If your EV is sitting in your garage fully charged (cars are typically parked 95 percent of the time) and you lose power, that big battery offers an opportunity to keep the lights on. And when there’s a sudden spike in demand for the grid—because everyone wants to turn on their AC during a heat wave or their heat during a deep freeze—utilities could pay homeowners for their excess battery power. This is known as bidirectional or vehicle-to-grid charging (aka V2G), and it’s “one of the legitimate game changers,” says Clifford Rechtschaffen, commissioner of the California Public Utilities Commission. “If all the EVs in the state plug in during these peak load times and feed power back to the grid, they’re acting as giant batteries. We could use them to greatly relieve stress on the grid during the periods of greatest need.” It’s still early days for V2G. More than 100 V2G pilots are scattered worldwide, though most are in Europe. California’s experimentation has been limited to small test programs. Still, more makers of cars and chargers are offering two-way charging, and experts think the concept could work on a large scale. Some 200 million electric vehicles could be on global roads by 2030, according to a recent estimate. California alone could have 14 million by 2035, the Natural Resources Defense Council estimates. If just local utilities could exploit all those batteries, they’d be able to power every home in the state for three days.",
+      "date": "9/22/2022",
+      "id": 6
     },
     {
-      "id": 2,
+      "user": "andreas",
+      "pic": "/src/assets/user3.svg",
+      "title": "IHG hack: 'Vindictive' couple deleted hotel chain data for fun",
+      "content": "Describing themselves as a couple from Vietnam, they say they first tried a ransomware attack, then deleted large amounts of data when they were foiled. They accessed the FTSE 100 firm's databases thanks to an easily found and weak password, Qwerty1234. An expert says the case highlights the vindictive side of criminal hackers. UK-based IHG operates 6,000 hotels around the world, including the Holiday Inn, Crowne Plaza and Regent brands. On Monday last week, customers reported widespread problems with booking and check-in. For 24 hours IHG responded to complaints on social media by saying that the company was \"undergoing system maintenance\". Then on the Tuesday afternoon it told investors that it had been hacked. \"Booking channels and other applications have been significantly disrupted since yesterday,\" it said in an official notice lodged with the London Stock Exchange.",
+      "date": "9/22/2022",
+      "id": 9
+    },
+    {
+      "user": "vasilis",
+      "pic": "/src/assets/user1.svg",
+      "title": "5G Small Cells Face Deployment Dip",
+      "content": "A sizeable cellular infrastructure and fiber provider in the U.S. is seeing a temporary slowdown in its rollout of 5G small cells because its mobile network operator (MNO) customers are concentrating on large-scale C-band 5G deployments for the time being. “I see a lull in the action with small cells,” Jay Floyd, vice president of strategy and product at ExteNet—a provider of fiber, small cells, and distributed antenna systems—told EE Times. Verizon and AT&T faced delays when initially implementing C-band (3.7 to 4.2 GHz) 5G mid-band services due to Federal Aviation Authority (FAA) concerns about the new cellular technology interfering with air travel. Now that this issue has largely been addressed, Verizon said it planned to cover 175 million people in the U.S. with C-band 5G service by the end of 2022, while AT&T expects to cover 100 million. This macro infrastructure burst, however, has slowed down the deployment of 5G small cells. These tiny transceivers, which first came about with 4G, have been used to help deepen the coverage and expand the capacity available in a specific area of a cellular network, as well as increase the data-download speeds for users in that zone.",
+      "date": "9/22/2022",
+      "id": 11
+    },
+    {
       "user": "eleni",
-      "title": "iPhone 14 Pro και iPhone Pro Max με 48MP κύρια κάμερα και «έξυπνο» notch",
-      "date": "5/8/2022",
-      "votes": "12",
-      "content": "Στο πλαίσιο του σημερινού Apple Far Out Event που ολοκληρώθηκε πριν λίγο, η Apple αποκάλυψε τα iPhone 14 Pro και iPhone 14 Pro Max.\n\nΤα μοντέλα της σειράς Pro απολαμβάνουν αρκετές αναβαθμίσεις συγκριτικά με τα iPhone 14 και iPhone 14 Plus, πόσω μάλλον με τους προκατόχους τους.\n\nΓια αρχή, εξοπλίζονται με τρεις κάμερες που εκμεταλλεύονται πλήρως το νέο λειτουργικό σύστημα, το νέο τσιπ αλλά και το ανανεωμένο hardware. Για την ακρίβεια, ο βασικός αισθητήρας των 48MP (quad-pixel, f/1.78, 24mm focal length) είναι κατά 65% μεγαλύτερος από του iPhone 13 Pro. Αντίστοιχα, ο αισθητήρας ultra-wide (f/2.2, 13mm focal length) αποδίδει καλύτερα."
-    },
-    {
-      "id": 3,
-      "user": "giannis",
-      "title": "Ο επικεφαλής αρχιτεκτονικής του PlayStation, Masayasu Ito, αποσύρεται μετά από 36 χρόνια",
-      "date": "6/8/2022",
-      "votes": "12",
-      "content": "Η Sony Interactive Entertainment- το τμήμα της εταιρείας που είναι υπεύθυνο για τις κονσόλες και τα αξεσουάρ παιχνιδιών του PlayStation χάνει έναν από τους κύριους αρχιτέκτονές της. \n\nΗ εταιρεία επιβεβαίωσε στο Bloomberg News ότι ο Masayasu Ito, ο οποίος ηγήθηκε της ανάπτυξης του PlayStation 4 και του PlayStation 5, αποχωρεί από το ρόλο του την 1η Οκτωβρίου. Ο Ito εργάζεται στη Sony εδώ και 36 χρόνια, ενώ εντάχθηκε στην εταιρεία το 1986 και ξεκίνησε με την ανάπτυξη του ηχητικού εξοπλισμού αυτοκινήτων τα πρώτα χρόνια παρουσίας του στην εταιρεία. \n\nΜετακινήθηκε στο τμήμα κονσολών το 2000 και έκτοτε συνέβαλε στην ανάπτυξη των παιχνιδοκονσολών PlayStation της Sony, όπως το PS Portable και το PS4 Pro. Στη συνέχεια  έγινε εκτελεστικός αντιπρόεδρος του τμήματος Hardware Engineering and Operation και διευθυντής της Sony Interactive Entertainment. Αν και η Sony δεν ανέλυσε τους λόγους της αποχώρησης του Ito, επιβεβαίωσε στο Bloomberg ότι το 60χρονο στέλεχος αποχωρεί. Θα διατηρήσει την εργασία του σε \"ρόλους που σχετίζονται με το mobility gaming\" εντός του ευρύτερου ομίλου Sony- θα είναι επίσης σύμβουλος της SIE για τους επόμενους 18 μήνες."
-    },
-    {
-      "id": 4,
-      "user": "andreas",
-      "title": "Οι φιλικές προς το περιβάλλον οδηγίες πλοήγησης των Google Maps έρχονται σε 40 ευρωπαϊκές χώρες",
-      "date": "9/8/2022",
-      "votes": 15,
-      "content": "Η Google επεκτείνει τη φιλική προς το περιβάλλον λειτουργία πλοήγησης των Χαρτών της, επεκτείνοντας τη λειτουργία σε δεκάδες ευρωπαϊκές χώρες και κάνοντάς την ακόμη πιο ισχυρή, επιτρέποντάς σας να επιλέξετε τον τύπο καυσίμου με τον οποίο λειτουργεί το αυτοκίνητό σας.\n\nΗ λειτουργία, που ξεκίνησε αρχικά στις ΗΠΑ και τον Καναδά πέρυσι, πλέον επισημαίνει τις διαδρομές που χρησιμοποιούν λιγότερη ενέργεια, εάν έχουν παρόμοιο χρόνο άφιξης με άλλες εναλλακτικές διαδρομές. Η Google αναφέρει ότι από σήμερα, η λειτουργία επεκτείνεται στους χρήστες σε σχεδόν 40 ευρωπαϊκές χώρες, συμπεριλαμβανομένης της Γαλλίας, της Ιρλανδίας, της Πολωνίας, της Ισπανίας και του Ηνωμένου Βασιλείου. Αν και δεν βρήκαμε τη σχετική λίστα, η λειτουργία δεν εμφανίζεται για την ώρα στους Έλληνες χρήστες της εφαρμογής κάτι που μπορεί να γίνει αργότερα."
+      "pic": "/src/assets/user2.svg",
+      "title": "Google loses appeal over record EU anti-trust Android fine",
+      "content": "The European General Court reduced the European Commission's original fine slightly in Wednesday's final ruling on Google's appeal. It said this was to reflect \"the gravity and the duration\" of the infringement. \"The General Court largely confirms the Commission's decision that Google imposed unlawful restrictions on manufacturers of Android mobile devices and mobile network in order to consolidate the dominant position of its search engine,\" it said. A European Commission spokesperson said it will \"carefully study the judgement and decide on possible next steps\". The European Consumer Organisation, which represents a network of consumer groups across the EU, welcomed the ruling. Monique Goyens, its director general, said the ruling \"confirms that Europe's consumers must enjoy meaningful choice between search engines and browsers on their phones and tablets\". She said Google had deprived consumers of \"genuine choice\" over which search engines to use. \"If they preferred, for example, to use more innovative and privacy-friendly services, Google's restrictions prevented them from doing so.\" The court's ruling shores up the European Commission's efforts to clamp down on Big Tech, after anti-trust fines against Intel and Qualcomm were quashed by the European General Court earlier this year.",
+      "date": "9/26/2022",
+      "id": 12
     }
   ]
 }

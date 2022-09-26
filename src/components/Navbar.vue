@@ -5,25 +5,35 @@
       <img class="search-icon" src="../assets/search.svg" alt="">
       <input type="text" class="search" placeholder="Search here..."/>
     </div>
-    <router-link to="/signin" class="sign-in">Sign In</router-link>
-    <div @click="logout" class="logout">Logout</div>
+    <router-link v-if="!nouser" to="/signin" class="sign-in">Sign In</router-link>
+    <router-link v-if="nouser" to="/myposts" class="new-p">New Post</router-link>
+    <user/>
+
 
   </div>
 </template>
 
 <script setup>
-
+import user from "@/components/User.vue";
 import {useUserStore} from "@/stores/UserStore";
 import {ref} from "vue";
+import {storeToRefs} from "pinia";
+
+const emit = defineEmits(['newpost'])
+
 
 const res = useUserStore();
-const nouser = ref(res.get());
+if (localStorage.getItem("userinfo")) {
+  res.yesUser()
+} else {
+  res.noUser()
+}
+const reactiveprops = storeToRefs(res)
+const nouser = reactiveprops.user
 const logout = () => {
   localStorage.clear();
   res.noUser();
-  console.log(res.get())
 }
-
 </script>
 
 <script>
@@ -104,6 +114,25 @@ export default {
   cursor: pointer;
   top: 25%;
   right: 30px;
+  background-color: rgb(0, 0, 0, 0);
+  border: 2px solid #22d09b;
+  color: #22d09b;
+  border-radius: 18px;
+  padding: 6px 16px;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.79);
+  -moz-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.5);
+  box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.1);
+}
+
+.new-p {
+  font-family: 'poppins', sans-serif;
+  font-size: 13px;
+  text-decoration: none;
+  position: absolute;
+  cursor: pointer;
+  top: 35%;
+  right: 300px;
   background-color: rgb(0, 0, 0, 0);
   border: 2px solid #22d09b;
   color: #22d09b;

@@ -1,11 +1,11 @@
 <template>
   <div class="post">
-    <h2>Edit your post :</h2>
-    <input v-model="editTitle" class="tandp" type="text" id="Title" placeholder="Title (min: 2 characters)"><br>
-    <textarea v-model="editContent"
+    <h2>Make a new post :</h2>
+    <input v-model="title" class="tandp" type="text" id="Title" placeholder="Title (min: 2 characters)"><br>
+    <textarea v-model="content"
               placeholder="Write your post... (min: 10 characters)"></textarea><br>
-    <button class="button-1" @click="submitChanges">Submit Changes</button>
-    <button class="button-2" @click="cancelChanges">Cancel</button>
+    <button class="button-1" @click="submitPost">Post</button>
+
 
   </div>
 </template>
@@ -20,28 +20,25 @@ const props = defineProps({
     required: true
   }
 })
-const editTitle = ref('')
-const editContent = ref('')
-const editingId = ref('')
-
-onMounted(async () => {
-  const post = await axios.get(`http://localhost:3000/posts/${props.eId}`)
-  editingId.value = props.eId;
-  editTitle.value = post.data.title;
-  editContent.value = post.data.content;
-})
+const title = ref('')
+const content = ref('')
+const user = JSON.parse(localStorage.getItem("userinfo"));
 const emit = defineEmits(['done'])
 
 const cancelChanges = () => {
   emit('done');
 }
 
-const submitChanges = async () => {
-  let edited = {title: editTitle.value, content: editContent.value}
-  let result = await axios.patch("http://localhost:3000/posts/" + props.eId, edited);
-  if (result.status == 200) {
-    emit('done');
-  }
+const submitPost = async () => {
+  let username = JSON.parse(localStorage.getItem('userinfo'));
+  let res = await axios.get(`http://localhost:3000/user?username=${username}`);
+  let pic = res.data[0].pic;
+  let date = new Date().toLocaleDateString();
+  let edited = {user, pic, title: title.value, content: content.value, date}
+  let result = await axios.post("http://localhost:3000/posts/", edited);
+  title.value = '';
+  content.value = '';
+  emit('done');
 }
 
 </script>
@@ -49,7 +46,7 @@ const submitChanges = async () => {
 
 <script>
 export default {
-  name: "Post",
+  name: "Newpost",
 }
 </script>
 
@@ -71,25 +68,6 @@ h2 {
   color: #22d09b;
 }
 
-.button-2 {
-  font-family: 'poppins', sans-serif;
-  font-size: 13px;
-  text-decoration: none;
-  position: absolute;
-  cursor: pointer;
-  bottom: 6px;
-  left: 240px;
-  transform: translateX(-50%);
-  background-color: rgb(0, 0, 0, 0);
-  border: 2px solid indianred;
-  color: indianred;
-  border-radius: 18px;
-  padding: 6px 16px;
-  letter-spacing: 1px;
-  -webkit-box-shadow: 0px 0px 42px 4px rgba(205, 92, 92, 0.79);
-  -moz-box-shadow: 0px 0px 42px 4px rgba(205, 92, 92, 0.5);
-  box-shadow: 0px 0px 12px 4px rgba(205, 92, 92, 0.1);
-}
 
 .button-1 {
 
@@ -99,7 +77,7 @@ h2 {
   position: absolute;
   cursor: pointer;
   bottom: 6px;
-  left: 95px;
+  left: 55px;
   transform: translateX(-50%);
   background-color: rgb(0, 0, 0, 0);
   border: 2px solid #22d09b;
