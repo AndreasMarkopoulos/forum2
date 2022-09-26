@@ -49,11 +49,11 @@ const logout = () => {
 let username = JSON.parse(localStorage.getItem("userinfo"));
 </script>
 
-<script>
-export default {
-  name: "User"
-}
-</script>
+<!--<script>-->
+<!--export default {-->
+<!--  name: "User"-->
+<!--}-->
+<!--</script>-->
 
 <style scoped>
 .user {

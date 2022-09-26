@@ -3,14 +3,40 @@
   <div class="bg-nonav container">
     <div class="si-box">
       <h1>Create an account!</h1>
-      <input placeholder="Username" type="text"/>
-      <input placeholder="Email" type="email"/>
-      <input placeholder="Password" type="password">
-      <router-link class="sub-btn" to="/">Sign up</router-link>
+      <input placeholder="Username" v-model="username" type="text"/>
+      <input placeholder="Email" v-model="email" type="email"/>
+      <input placeholder="Password" v-model="password" type="password">
+      <button class="sub-btn" @click="signUp">Sign up</button>
       <router-link class="go-signup" to="/signin">Sign in</router-link>
     </div>
   </div>
 </template>
+
+
+<script setup>
+import axios from "axios";
+import router from "@/routers.js";
+import {defineProps, ref} from "vue";
+
+
+let usr = defineProps({
+  username: String,
+  password: String,
+  email: String
+})
+const signUp = async () => {
+  let res = await axios.post("http://localhost:3000/user", {
+    username: usr.username,
+    email: usr.email,
+    password: usr.password,
+    admin: false
+  });
+  if (res.status === 201) {
+    localStorage.setItem("userinfo", JSON.stringify(usr.username));
+    await router.push({path: '/'});
+  }
+}
+</script>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
@@ -43,6 +69,7 @@ input:focus {
 }
 
 .sub-btn {
+  border: none;
   left: 50%;
   transform: translateX(-50%);
   margin: 0 auto;

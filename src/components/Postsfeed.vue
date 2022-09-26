@@ -3,11 +3,12 @@
     <ul class="post" v-for="post in posts.slice().reverse()" :key="post.id">
       <div class="post-info">
         <img src="" class="del-post" alt="">
-        <img :src="post.pic" alt="" class="user-img">
-
+        <img :src="usersMap.get(post.user)" alt="" class="user-img">
         <h2 class="user">{{ post.user }}</h2>
         <h3 class="date">{{ post.date }}</h3>
       </div>
+
+
       <div class="content">
         <h1 class="p-title">{{ post.title }}</h1>
         <p class="p-text">{{ post.content }}</p>
@@ -20,19 +21,33 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 
 onMounted(() => {
   dataIn();
 })
 const posts = ref([]);
-
+const usersMap = reactive(new Map())
 const dataIn = async () => {
   let result = await axios.get('http://localhost:3000/posts/');
   posts.value = result.data;
 
+  // posts.value
+  //     .map(post => post.user)
+  //     .forEach(user => async () => {
+  //       let username = await axios.get(`http://localhost:3000/user?username=${user}`);
+  //       usersMap.value.set(username.data[0].username, username.data[0].pic)
+  //     })
+  for (const user of posts.value
+      .map(post => post.user)) {
+    if (!usersMap.has(user)) {
+      let username = await axios.get(`http://localhost:3000/user?username=${user}`);
+      usersMap.set(username.data[0].username, username.data[0].pic)
+    }
+  }
 }
+
 
 </script>
 

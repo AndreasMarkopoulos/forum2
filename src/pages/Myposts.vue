@@ -10,7 +10,7 @@
         <div class="post-info">
           <img @click="delPost(mypost.id)" src="../assets/delete.svg" alt="" class="del-post">
           <img @click="editEnable(mypost.id)" src="../assets/edit.svg" alt="" class="edit-post">
-          <img :src="mypost.pic" alt="" class="user-img">
+          <img :src="pic" alt="" class="user-img">
           <h2 class="user">{{ mypost.user }}</h2>
           <h3 class="date">{{ mypost.date }}</h3>
         </div>
@@ -61,7 +61,7 @@ const editEnable = (id) => {
   editing.value = !editing.value;
 }
 
-
+const pic = ref();
 const username = ref("")
 const myposts = ref([]);
 const myPostDataIn = async () => {
@@ -73,6 +73,11 @@ const myPostDataIn = async () => {
     if (result.data[i].user === username.value) {
       myposts.value.push(result.data[i]);
     }
+
+  let usern = await axios.get(`http://localhost:3000/user?username=${username.value}`);
+  pic.value = usern.data[0].pic;
+
+
 }
 
 </script>

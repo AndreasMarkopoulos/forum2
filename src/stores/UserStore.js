@@ -10,6 +10,7 @@ export const useUserStore = defineStore('userStore', {
         async checkAdmin() {
             let username = JSON.parse(localStorage.getItem('userinfo'));
             let user = await axios.get(`http://localhost:3000/user?username=${username}`);
+            console.log(user.data[0])
             console.log(user.data[0].admin)
             this.admin = user.data[0].admin;
         },
