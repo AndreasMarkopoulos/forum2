@@ -11,7 +11,7 @@
           <img @click="delPost(mypost.id)" src="../assets/delete.svg" alt="" class="del-post">
           <img @click="editEnable(mypost.id)" src="../assets/edit.svg" alt="" class="edit-post">
           <img :src="pic" alt="" class="user-img">
-          <h2 class="user">{{ mypost.user }}</h2>
+          <h2 class="user">{{ username }}</h2>
           <h3 class="date">{{ mypost.date }}</h3>
         </div>
         <div class="content">
@@ -37,8 +37,9 @@ import Post from "@/components/Post.vue";
 
 
 onMounted(() => {
-  myPostDataIn();
-
+  setTimeout(() => {
+    myPostDataIn()
+  }, 100)
 })
 const editing = ref(false)
 const editingId = ref(Number);
@@ -49,7 +50,6 @@ const doneEditing = () => {
 }
 
 const delPost = async (id) => {
-  console.log(id)
   let result = await axios.delete("http://localhost:3000/posts/" + id);
   if (result.status == 200) {
     await myPostDataIn();
@@ -66,11 +66,12 @@ const username = ref("")
 const myposts = ref([]);
 const myPostDataIn = async () => {
   myposts.value.splice(null, myposts.value.length)
-  let user = localStorage.getItem('userinfo');
-  username.value = JSON.parse(user);
+  let usr = localStorage.getItem('userinfo');
+  username.value = JSON.parse(usr);
+  let uid = (await axios.get(`http://localhost:3000/user?username=${username.value}`)).data[0].id
   let result = await axios.get('http://localhost:3000/posts/');
   for (let i = 0; i < result.data.length; i++)
-    if (result.data[i].user === username.value) {
+    if (result.data[i].user === uid) {
       myposts.value.push(result.data[i]);
     }
 

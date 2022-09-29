@@ -1,20 +1,25 @@
 {
   "user": [
     {
-      "pic": "/src/assets/user3.svg",
+      "pic": "/src/assets/avatars/avatar (2).svg",
       "username": "andreas",
       "email": "andreas@email.com",
       "password": "1234",
       "admin": true,
-      "id": 1
-    },
-    {
-      "pic": "/src/assets/user1.svg",
-      "username": "kostas",
-      "email": "kostas@email.com",
-      "password": "1234",
-      "admin": false,
-      "id": 2
+      "id": 1,
+      "following": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        6
+      ]
     },
     {
       "pic": "/src/assets/user2.svg",
@@ -22,7 +27,8 @@
       "email": "maria@email.com",
       "password": "1234",
       "admin": false,
-      "id": 3
+      "id": 3,
+      "following": []
     },
     {
       "pic": "/src/assets/user4.svg",
@@ -30,49 +36,60 @@
       "email": "giorgos@email.com",
       "password": "1234",
       "admin": false,
-      "id": 4
+      "id": 4,
+      "following": []
     },
     {
-      "pic": "/src/assets/user2.svg",
+      "pic": "/src/assets/avatars/avatar (3).svg",
       "username": "eleni",
       "email": "eleni@email.com",
       "password": "1234",
       "admin": false,
-      "id": 5
+      "id": 5,
+      "following": []
     },
     {
-      "pic": "/src/assets/user5.png",
+      "pic": "/src/assets/avatars/avatar (6).svg",
       "username": "vasilis",
       "email": "vasilis@email.com",
       "password": "1234",
       "admin": false,
-      "id": 6
+      "id": 6,
+      "following": []
+    },
+    {
+      "username": "kostas",
+      "email": "kostas",
+      "password": "1234",
+      "admin": false,
+      "pic": "/src/assets/user1.svg",
+      "id": 7
     }
   ],
   "posts": [
     {
-      "user": "andreas",
+      "user": 1,
       "title": "Electric Vehicles Could Rescue the US Power Grid",
       "content": "Cars are no longer just modes of transportation; they are increasingly integrated into the larger energy infrastructure. If your EV is sitting in your garage fully charged (cars are typically parked 95 percent of the time) and you lose power, that big battery offers an opportunity to keep the lights on. And when there’s a sudden spike in demand for the grid—because everyone wants to turn on their AC during a heat wave or their heat during a deep freeze—utilities could pay homeowners for their excess battery power. This is known as bidirectional or vehicle-to-grid charging (aka V2G), and it’s “one of the legitimate game changers,” says Clifford Rechtschaffen, commissioner of the California Public Utilities Commission. “If all the EVs in the state plug in during these peak load times and feed power back to the grid, they’re acting as giant batteries. We could use them to greatly relieve stress on the grid during the periods of greatest need.” It’s still early days for V2G. More than 100 V2G pilots are scattered worldwide, though most are in Europe. California’s experimentation has been limited to small test programs. Still, more makers of cars and chargers are offering two-way charging, and experts think the concept could work on a large scale. Some 200 million electric vehicles could be on global roads by 2030, according to a recent estimate. California alone could have 14 million by 2035, the Natural Resources Defense Council estimates. If just local utilities could exploit all those batteries, they’d be able to power every home in the state for three days.",
       "date": "9/22/2022",
       "id": 6
     },
     {
-      "user": "andreas",
+      "user": 1,
       "title": "IHG hack: 'Vindictive' couple deleted hotel chain data for fun",
       "content": "Describing themselves as a couple from Vietnam, they say they first tried a ransomware attack, then deleted large amounts of data when they were foiled. They accessed the FTSE 100 firm's databases thanks to an easily found and weak password, Qwerty1234. An expert says the case highlights the vindictive side of criminal hackers. UK-based IHG operates 6,000 hotels around the world, including the Holiday Inn, Crowne Plaza and Regent brands. On Monday last week, customers reported widespread problems with booking and check-in. For 24 hours IHG responded to complaints on social media by saying that the company was \"undergoing system maintenance\". Then on the Tuesday afternoon it told investors that it had been hacked. \"Booking channels and other applications have been significantly disrupted since yesterday,\" it said in an official notice lodged with the London Stock Exchange.",
       "date": "9/22/2022",
       "id": 9
     },
     {
-      "user": "vasilis",
+      "user": 6,
       "title": "5G Small Cells Face Deployment Dip",
       "content": "A sizeable cellular infrastructure and fiber provider in the U.S. is seeing a temporary slowdown in its rollout of 5G small cells because its mobile network operator (MNO) customers are concentrating on large-scale C-band 5G deployments for the time being. “I see a lull in the action with small cells,” Jay Floyd, vice president of strategy and product at ExteNet—a provider of fiber, small cells, and distributed antenna systems—told EE Times. Verizon and AT&T faced delays when initially implementing C-band (3.7 to 4.2 GHz) 5G mid-band services due to Federal Aviation Authority (FAA) concerns about the new cellular technology interfering with air travel. Now that this issue has largely been addressed, Verizon said it planned to cover 175 million people in the U.S. with C-band 5G service by the end of 2022, while AT&T expects to cover 100 million. This macro infrastructure burst, however, has slowed down the deployment of 5G small cells. These tiny transceivers, which first came about with 4G, have been used to help deepen the coverage and expand the capacity available in a specific area of a cellular network, as well as increase the data-download speeds for users in that zone.",
       "date": "9/22/2022",
       "id": 11
     },
     {
-      "user": "eleni",
+      "user": 5,
       "title": "Google loses appeal over record EU anti-trust Android fine",
       "content": "The European General Court reduced the European Commission's original fine slightly in Wednesday's final ruling on Google's appeal. It said this was to reflect \"the gravity and the duration\" of the infringement. \"The General Court largely confirms the Commission's decision that Google imposed unlawful restrictions on manufacturers of Android mobile devices and mobile network in order to consolidate the dominant position of its search engine,\" it said. A European Commission spokesperson said it will \"carefully study the judgement and decide on possible next steps\". The European Consumer Organisation, which represents a network of consumer groups across the EU, welcomed the ruling. Monique Goyens, its director general, said the ruling \"confirms that Europe's consumers must enjoy meaningful choice between search engines and browsers on their phones and tablets\". She said Google had deprived consumers of \"genuine choice\" over which search engines to use. \"If they preferred, for example, to use more innovative and privacy-friendly services, Google's restrictions prevented them from doing so.\" The court's ruling shores up the European Commission's efforts to clamp down on Big Tech, after anti-trust fines against Intel and Qualcomm were quashed by the European General Court earlier this year.",
       "date": "9/26/2022",

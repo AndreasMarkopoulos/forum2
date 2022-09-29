@@ -54,7 +54,13 @@ const demote = async (id) => {
 
 }
 const delUser = async (id) => {
-  let result = await axios.delete("http://localhost:3000/user/" + id);
+  let usr = await axios.get("http://localhost:3000/user/" + id);
+  console.log(usr.data.username)
+  // await axios.delete("http://localhost:3000/user/" + id);
+  const userPosts = (await axios.get(`http://localhost:3000/posts?user=${usr.data.username}`)).data;
+  userPosts.forEach(post => {
+    axios.delete(`http://localhost:3000/posts/${post.id}`);
+  })
   await dataIn();
 }
 </script>

@@ -1,40 +1,45 @@
 <template>
   <div v-if="nouser" class="dropdown">
     <div class="user" id="a">
-      <img src="../assets/user3.svg" alt="">
+      <img :src="profPic" alt="">
       <p>{{ username }}</p>
     </div>
     <div class="dropdown-content" id="b">
+      <div @click="toProfile" class="drop-option">My Profile</div>
       <div v-if="admin" @click="useredit" class="drop-option">Edit Users</div>
       <div @click="logout" class="drop-option">Logout</div>
+
     </div>
   </div>
 </template>
 
 <script setup>
 import {useUserStore} from "@/stores/UserStore";
-import {onMounted, ref} from "vue";
+import {onBeforeMount, onMounted, ref} from "vue";
 import router from "@/routers.js";
 import {storeToRefs} from "pinia";
+import axios from "axios";
+
 
 const res = useUserStore();
-
+const profPic = ref();
 const reactiveprops = storeToRefs(res)
 const nouser = reactiveprops.user
+let username = JSON.parse(localStorage.getItem("userinfo"));
+onMounted(async () => {
+  let res = await axios.get(`http://localhost:3000/user?username=${username}`);
+  profPic.value = res.data[0].pic
+})
 
 //ADMIN
 const admin = reactiveprops.admin
 res.checkAdmin();
-console.log(admin.value)
 // ADMIN
 
 
-if (localStorage.getItem("userinfo")) {
-  res.yesUser()
-} else {
-  res.noUser()
+const toProfile = () => {
+  router.push({path: 'profile'})
 }
-
 
 const useredit = () => {
   router.push({path: '/useredit'})
@@ -44,9 +49,10 @@ const logout = () => {
   localStorage.clear();
   res.noUser();
   router.push({path: '/'})
+  location.reload()
 }
 
-let username = JSON.parse(localStorage.getItem("userinfo"));
+
 </script>
 
 <!--<script>-->

@@ -29,7 +29,8 @@ const signUp = async () => {
     username: usr.username,
     email: usr.email,
     password: usr.password,
-    admin: false
+    admin: false,
+    pic: "/src/assets/user1.svg"
   });
   if (res.status === 201) {
     localStorage.setItem("userinfo", JSON.stringify(usr.username));

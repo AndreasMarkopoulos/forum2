@@ -1,21 +1,25 @@
 <template>
+  <navbar/>
+  <sidebar/>
   <div class="postarea">
     <ul class="post" v-for="post in posts.slice().reverse()" :key="post.id">
-      <div class="post-info">
-        <img src="" class="del-post" alt="">
-        <img :src="usersMap.get(post.user) ? usersMap.get(post.user).pic : '/src/assets/avatars/image-default.png'"
-             alt="" class="user-img">
-        <img v-if="nouser && usersMap.get(post.user)?.uid !== myId" @click="follow(usersMap.get(post.user).uid,post.id)"
-             class="follow"
-             :src="followIcon[post.id]"
-             alt="">
-        <h2 class="user">{{ usersMap.get(post.user)?.username }} </h2>
-        <h3 class="date">{{ post.date }}</h3>
-      </div>
-      <div class="content">
-        <h1 class="p-title">{{ post.title }}</h1>
-        <p class="p-text">{{ post.content }}</p>
+      <div class="posts" v-if="usersMap.get(post.user).uid!=myId && followIcon[post.id]=='/src/assets/following.svg'">
+        <div class="post-info">
+          <img src="" class="del-post" alt="">
+          <img :src="usersMap.get(post.user) ? usersMap.get(post.user).pic : '/src/assets/avatars/image-default.png'"
+               alt="" class="user-img">
+          <img v-if="nouser && usersMap.get(post.user).uid!=myId" @click="follow(usersMap.get(post.user).uid,post.id)"
+               class="follow"
+               :src="followIcon[post.id]"
+               alt="">
+          <h2 class="user">{{ usersMap.get(post.user)?.username }} </h2>
+          <h3 class="date">{{ post.date }}</h3>
+        </div>
+        <div class="content">
+          <h1 class="p-title">{{ post.title }}</h1>
+          <p class="p-text">{{ post.content }}</p>
 
+        </div>
       </div>
     </ul>
 
@@ -29,11 +33,11 @@ import axios from "axios";
 import {useUserStore} from "@/stores/UserStore";
 import {storeToRefs} from "pinia";
 
+
 onMounted(() => {
   dataIn()
 
 })
-
 
 const nouser = ref();
 
@@ -100,7 +104,9 @@ const dataIn = async () => {
 </script>
 
 <script>
-import Post from "./Post.vue"
+import sidebar from "/src/components/Sidebar.vue";
+import navbar from "/src/components/Navbar.vue";
+import Post from "/src/components/Post.vue"
 
 export default {
   name: "Postsfeed",
@@ -111,6 +117,10 @@ export default {
 </script>
 
 <style scoped>
+
+.posts {
+  border-bottom: 2px solid #2b2a2b;
+}
 
 .follow {
   cursor: pointer;
@@ -194,6 +204,6 @@ h2 {
   width: 80%;
   right: 0px;
   height: fit-content;
-  border-bottom: 2px solid #2b2a2b;
+
 }
 </style>
