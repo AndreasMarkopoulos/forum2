@@ -2,54 +2,56 @@
   <navbar/>
   <sidebar/>
   <div class="postarea">
-    <div class="usrnm">
-      <h1 class="title2">Change Username</h1>
-      <input type="text" v-model="user">
-      <div class="button-1" @click="changeUsr">Change</div>
+    <div class="user">
+      <img class="profpic" :src="Pic" alt="">
+      <h1>{{ user }}</h1>
+      <h2 class="followers">{{ followers }} Followers</h2>
+      <img src="/src/assets/settings2.svg" v-if="selProf===myId" @click="toEditProfile"
+           alt=""
+           class="settings">
     </div>
-
-    <h1 class="title1">Change Profile Picture</h1>
-    <div @click="changeImg(imgId)" class="profpics" v-for="(img,imgId) in images" :key=imgId alt="">
-      <img :src="img" class="img">
-    </div>
+    <img class="editdesc" src="/src/assets/edit.svg" v-if="selProf===myId" @click="toEditProfile">
+    <div class="desc">{{ desc }}</div>
+    <label for="desc">Description</label>
   </div>
 </template>
 
 <script setup>
 import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
+import router from "@/routers";
+import {useUserStore} from "@/stores/UserStore";
 
 const myId = ref();
+const Id = ref();
+const Pic = ref();
 const user = ref('');
-user.value = JSON.parse(localStorage.getItem('userinfo'));
+const desc = ref()
+const followers = ref()
+const selProf = ref()
+
 onMounted(async () => {
-  let res = await axios.get(`http://localhost:3000/user?username=${user.value}`);
-  myId.value = res.data[0].id
+  selProf.value = localStorage.getItem('selectedProf')
+  await dataIn(JSON.parse(selProf.value));
 })
 
-
-const images = reactive([])
-for (let i = 0; i < 14; i++) {
-  images.push(`/src/assets/avatars/avatar (${i}).svg`)
+const dataIn = async (id) => {
+  let myUsername = JSON.parse(localStorage.getItem('userinfo'));
+  myId.value = (await axios.get(`http://localhost:3000/user?username=${myUsername}`)).data[0].id
+  let res = await axios.get(`http://localhost:3000/user/${id}`);
+  user.value = res.data.username
+  Id.value = res.data.id
+  Pic.value = res.data.pic
+  followers.value = res.data.followers
+  desc.value = res.data.description
+  selProf.value = JSON.parse(selProf.value)
+  window.scrollTo(0, 0);
 }
 
-const changeUsr = async () => {
-  if (user) {
-    console.log(user.value)
-    let usr = await axios.patch(`http://localhost:3000/user/${myId.value}`, {username: user.value});
-    localStorage.clear()
-    localStorage.setItem('userinfo', JSON.stringify(user.value))
-    location.reload()
-  }
-
+const toEditProfile = () => {
+  router.push({path: '/editprofile'})
 }
 
-const changeImg = async (id) => {
-  console.log(id)
-  let newpic = `/src/assets/avatars/avatar (${id}).svg`
-  await axios.patch(`http://localhost:3000/user/${myId.value}`, {pic: newpic});
-  location.reload()
-}
 </script>
 
 <script>
@@ -64,13 +66,104 @@ export default {
 
 <style scoped>
 
-.button-1 {
+.editdesc {
+  cursor: pointer;
+  position: absolute;
+  margin-left: 178px;
+  margin-top: 165px;
+  width: 20px;
+  height: 20px;
+}
 
+.followers {
+  font-size: 15px;
+  font-weight: 200;
+  color: #22d09b;
+  margin-left: 142px;
+  margin-top: 75px;
+  position: absolute;
+}
+
+label {
+  font-size: 20px;
+  color: #22d09b;
+  position: absolute;
+  left: 50px;
+  top: 235px;
+}
+
+.tandp {
+  color: #a19f9f;
+  margin-left: 5px;
+  font-size: 18px;
+  padding: 5px 25px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 43px;
+  background: #232122;
+  box-shadow: inset 8px 8px 16px #1a191a,
+  inset -8px -8px 16px #2c292b;
+  width: 95%;
+  min-height: 30px;
+  height: fit-content;
+}
+
+.desc {
+  top: 280px;
+  position: absolute;
+  color: #a19f9f;
+  left: 40px;
+  resize: none;
+  font-size: 16px;
+  padding: 10px;
+  background: #232122;
+  border-bottom: 2px solid #2b2a2b;
+  border-color: #2b2a2b;
+  width: 90%;
+  min-height: 240px;
+  height: fit-content;
+}
+
+.settings {
+  background-color: #232122;
+  padding: 5px;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 30px;
+  position: absolute;
+  left: 155px;
+  margin-top: 0;
+}
+
+.user {
+  border-bottom: 2px solid #2b2a2b;
+  display: flex;
+  height: 120px;
+  width: 70%;
+  margin-left: 80px;
+
+}
+
+.user h1 {
+  letter-spacing: 1px;
+  position: absolute;
+  left: 220px;
+  margin-top: 30px;
+  color: #22d09b;
+}
+
+.profpic {
+  height: 100px;
+}
+
+.button-1 {
+  top: 570px;
+  position: absolute;
   font-family: 'poppins', sans-serif;
   font-size: 13px;
   text-decoration: none;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 50px;
   background-color: rgb(0, 0, 0, 0);
   border: 2px solid #22d09b;
   color: #22d09b;

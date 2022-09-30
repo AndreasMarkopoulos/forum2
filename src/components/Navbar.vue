@@ -30,10 +30,6 @@ if (localStorage.getItem("userinfo")) {
 }
 const reactiveprops = storeToRefs(res)
 const nouser = reactiveprops.user
-const logout = () => {
-  localStorage.clear();
-  res.noUser();
-}
 </script>
 
 <script>

@@ -4,7 +4,8 @@ import axios from "axios";
 export const useUserStore = defineStore('userStore', {
     state: () => ({
         admin: Boolean,
-        user: Boolean
+        user: Boolean,
+        profileUser: Number,
     }),
     actions: {
         async checkAdmin() {
@@ -15,6 +16,13 @@ export const useUserStore = defineStore('userStore', {
                 return this.admin
             }
         },
+        getSelectedProfile() {
+            return this.profileUser
+        },
+        selectProfile(id) {
+            this.profileUser = id;
+        }
+        ,
         noUser() {
             this.user = false;
         },

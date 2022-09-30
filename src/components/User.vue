@@ -1,11 +1,12 @@
 <template>
   <div v-if="nouser" class="dropdown">
-    <div class="user" id="a">
-      <img :src="profPic" alt="">
+    <div class="user" id="a" @mouseover="chbg1" @mouseleave="chbg2">
+      <img :src="profPic ? profPic : '/src/assets/avatars/default_avatar.svg'" alt="">
       <p>{{ username }}</p>
     </div>
-    <div class="dropdown-content" id="b">
-      <div @click="toProfile" class="drop-option">My Profile</div>
+    <div class="dropdown-content" id="b" @mouseover="chbg1" @mouseleave="chbg2">
+      <div @click="toProfile" class="drop-option">Profile</div>
+      <div @click="toEditProfile" class="drop-option">My Account</div>
       <div v-if="admin" @click="useredit" class="drop-option">Edit Users</div>
       <div @click="logout" class="drop-option">Logout</div>
 
@@ -19,16 +20,30 @@ import {onBeforeMount, onMounted, ref} from "vue";
 import router from "@/routers.js";
 import {storeToRefs} from "pinia";
 import axios from "axios";
+import {useRoute} from "vue-router";
 
+function chbg1() {
+  document.getElementById('a').style.backgroundColor = '#22d09b';
+  document.getElementById('a').style.color = '#232122';
+}
 
+function chbg2() {
+  document.getElementById('a').style.backgroundColor = '#232122';
+  document.getElementById('a').style.color = '#22d09b';
+}
+
+const currentUser = ref()
 const res = useUserStore();
 const profPic = ref();
 const reactiveprops = storeToRefs(res)
 const nouser = reactiveprops.user
 let username = JSON.parse(localStorage.getItem("userinfo"));
 onMounted(async () => {
-  let res = await axios.get(`http://localhost:3000/user?username=${username}`);
-  profPic.value = res.data[0].pic
+  if (username) {
+    let res = await axios.get(`http://localhost:3000/user?username=${username}`);
+    profPic.value = res.data[0].pic
+    currentUser.value = res.data[0].id
+  }
 })
 
 //ADMIN
@@ -38,7 +53,16 @@ res.checkAdmin();
 
 
 const toProfile = () => {
-  router.push({path: 'profile'})
+  let profileId = currentUser.value;
+  localStorage.setItem('selectedProf', JSON.stringify(profileId));
+  router.push({path: '/profile'})
+  if (router.currentRoute.value.name == 'Profile') {
+    location.reload()
+  }
+}
+
+const toEditProfile = () => {
+  router.push({path: '/editprofile'})
 }
 
 const useredit = () => {
@@ -62,6 +86,8 @@ const logout = () => {
 <!--</script>-->
 
 <style scoped>
+
+
 .user {
   min-width: 205px;
   padding-bottom: 0px;
@@ -92,17 +118,6 @@ const logout = () => {
   padding-right: 0px;
 }
 
-.user p:hover {
-  color: #232122;
-}
-
-
-.user:hover {
-  background: #22d09b;
-  color: #232122;
-}
-
-/*drop-down menu*/
 .dropdown {
   padding: 0;
   margin-right: 30px;
@@ -137,10 +152,10 @@ const logout = () => {
 }
 
 
-.dropdown-content a:hover + .user {
-  background-color: #74faca;
-  border-radius: 0 0 4px 4px;
-}
+/*.dropdown-content a:hover + .user {*/
+/*  background-color: #74faca;*/
+/*  border-radius: 0 0 4px 4px;*/
+/*}*/
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {

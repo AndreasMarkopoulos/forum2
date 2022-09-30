@@ -1,25 +1,19 @@
 {
   "user": [
     {
-      "pic": "/src/assets/avatars/avatar (2).svg",
+      "pic": "/src/assets/avatars/avatar (12).svg",
       "username": "andreas",
       "email": "andreas@email.com",
       "password": "1234",
       "admin": true,
       "id": 1,
+      "followers": 2,
       "following": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        6
-      ]
+        5,
+        6,
+        8
+      ],
+      "description": "Hello my name is Andreas"
     },
     {
       "pic": "/src/assets/user2.svg",
@@ -28,6 +22,7 @@
       "password": "1234",
       "admin": false,
       "id": 3,
+      "followers": 0,
       "following": []
     },
     {
@@ -37,6 +32,7 @@
       "password": "1234",
       "admin": false,
       "id": 4,
+      "followers": 0,
       "following": []
     },
     {
@@ -46,7 +42,12 @@
       "password": "1234",
       "admin": false,
       "id": 5,
-      "following": []
+      "followers": 2,
+      "description": "Hi, my name is Eleni and I am an Electrical Engineering student",
+      "following": [
+        6,
+        1
+      ]
     },
     {
       "pic": "/src/assets/avatars/avatar (6).svg",
@@ -55,6 +56,7 @@
       "password": "1234",
       "admin": false,
       "id": 6,
+      "followers": 2,
       "following": []
     },
     {
@@ -63,7 +65,23 @@
       "password": "1234",
       "admin": false,
       "pic": "/src/assets/user1.svg",
+      "followers": 0,
+      "following": [],
       "id": 7
+    },
+    {
+      "username": "lampis",
+      "email": "lampis@mail.com",
+      "password": "1234",
+      "admin": false,
+      "followers": 1,
+      "following": [
+        5,
+        1
+      ],
+      "description": "Eimai o lampis\n",
+      "pic": "/src/assets/avatars/avatar (0).svg",
+      "id": 8
     }
   ],
   "posts": [
@@ -94,6 +112,14 @@
       "content": "The European General Court reduced the European Commission's original fine slightly in Wednesday's final ruling on Google's appeal. It said this was to reflect \"the gravity and the duration\" of the infringement. \"The General Court largely confirms the Commission's decision that Google imposed unlawful restrictions on manufacturers of Android mobile devices and mobile network in order to consolidate the dominant position of its search engine,\" it said. A European Commission spokesperson said it will \"carefully study the judgement and decide on possible next steps\". The European Consumer Organisation, which represents a network of consumer groups across the EU, welcomed the ruling. Monique Goyens, its director general, said the ruling \"confirms that Europe's consumers must enjoy meaningful choice between search engines and browsers on their phones and tablets\". She said Google had deprived consumers of \"genuine choice\" over which search engines to use. \"If they preferred, for example, to use more innovative and privacy-friendly services, Google's restrictions prevented them from doing so.\" The court's ruling shores up the European Commission's efforts to clamp down on Big Tech, after anti-trust fines against Intel and Qualcomm were quashed by the European General Court earlier this year.",
       "date": "9/26/2022",
       "id": 12
+    },
+    {
+      "user": 8,
+      "pic": "/src/assets/avatars/avatar (0).svg",
+      "title": "Google to close Stadia cloud service and refund gamers",
+      "content": "Google has announced plans to shut down its Stadia cloud gaming service and refund players.\n\nStadia was touted as a \"Netflix for games\" when it launched in November 2019, allowing players to stream games online without owning a console.\n\nBut the service will now come to an end on 18 January 2023 because of a lack of \"traction\" with gamers.\n\nGoogle has promised refunds to players who purchased its Stadia controller, as well as any games or add-on content.\n\nIt said it estimates those refunds will be completed by mid-January.",
+      "date": "9/30/2022",
+      "id": 13
     }
   ]
 }

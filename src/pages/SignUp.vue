@@ -30,6 +30,9 @@ const signUp = async () => {
     email: usr.email,
     password: usr.password,
     admin: false,
+    followers: 0,
+    following: [],
+    description: '',
     pic: "/src/assets/user1.svg"
   });
   if (res.status === 201) {
@@ -104,6 +107,9 @@ input:focus {
 }
 
 .container input {
+  color: white;
+  font-family: 'poppins', sans-serif;
+  letter-spacing: 1px;
   border-radius: 3px;
   margin: 0 auto 45px auto;
   min-width: 350px;

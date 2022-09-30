@@ -3,10 +3,11 @@
   <sidebar/>
   <div class="postarea">
     <ul class="post" v-for="post in posts.slice().reverse()" :key="post.id">
-      <div class="posts" v-if="usersMap.get(post.user).uid!=myId && followIcon[post.id]=='/src/assets/following.svg'">
+      <div class="posts" v-if="usersMap.get(post.user)?.uid!=myId && followIcon[post.id]=='/src/assets/following.svg'">
         <div class="post-info">
           <img src="" class="del-post" alt="">
-          <img :src="usersMap.get(post.user) ? usersMap.get(post.user).pic : '/src/assets/avatars/image-default.png'"
+          <img @click="goToProfile(usersMap.get(post.user).uid)"
+               :src="usersMap.get(post.user) ? usersMap.get(post.user)?.pic : '/src/assets/avatars/image-default.png'"
                alt="" class="user-img">
           <img v-if="nouser && usersMap.get(post.user).uid!=myId" @click="follow(usersMap.get(post.user).uid,post.id)"
                class="follow"
@@ -32,6 +33,7 @@ import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/UserStore";
 import {storeToRefs} from "pinia";
+import router from "@/routers";
 
 
 onMounted(() => {
@@ -47,12 +49,24 @@ const followIcon = reactive([])
 const usersMap = reactive(new Map())
 const myId = ref();
 
+const goToProfile = (profileId) => {
+  localStorage.setItem('selectedProf', JSON.stringify(profileId));
+  router.push({path: "/profile"})
+}
+
 const follow = async (id, postId) => {
   if (!following.includes(id)) {
+    let UpdatedFollowers = (await axios.get(`http://localhost:3000/user/${id}`)).data.followers
+    UpdatedFollowers += 1
+    await axios.patch(`http://localhost:3000/user/${id}`, {followers: UpdatedFollowers})
     following.push(id)
     followIcon[postId] = '/src/assets/following.svg';
 
   } else {
+    let UpdatedFollowers = (await axios.get(`http://localhost:3000/user/${id}`)).data.followers
+    UpdatedFollowers -= 1
+    await axios.patch(`http://localhost:3000/user/${id}`, {followers: UpdatedFollowers})
+
     for (let i = following.length - 1; i >= 0; i--) {
       if (following[i] === id) {
         following.splice(i, 1);
@@ -61,7 +75,7 @@ const follow = async (id, postId) => {
     followIcon[postId] = '/src/assets/follow.svg'
   }
   await axios.patch(`http://localhost:3000/user/${myId.value}`, {following})
-
+  await dataIn()
 }
 
 const dataIn = async () => {
@@ -86,7 +100,8 @@ const dataIn = async () => {
           {
             uid: user.id,
             username: user.username,
-            pic: user.pic
+            pic: user.pic,
+            followers: user.followers
           })
     }
   }
@@ -184,6 +199,7 @@ export default {
 }
 
 .user-img {
+  cursor: pointer;
   width: 55px;
   height: 55px;
 }

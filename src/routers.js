@@ -7,6 +7,7 @@ import userEdit from "@/pages/UserEdit.vue"
 import myFeed from "@/pages/MyFeed.vue";
 import {useUserStore} from "@/stores/UserStore.js";
 import profile from "@/pages/Profile.vue";
+import editProfile from "@/pages/EditProfile.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -42,17 +43,24 @@ const router = createRouter({
             path: "/signup",
         },
         {
+            name: "EditProfile",
+            component: editProfile,
+            path: '/editprofile'
+
+        },
+        {
             name: "Profile",
             component: profile,
             path: '/profile'
 
         }
+
     ]
 });
 
 
 router.beforeEach((to, from, next) => {
-    if ((to.path === '/myposts' || to.path === '/myfeed' || to.path === '/useredit' || to.path === '/profile') && !localStorage.getItem('userinfo')) {
+    if ((to.path === '/myposts' || to.path === '/myfeed' || to.path === '/useredit' || to.path === '/profile' || to.path === '/editprofile' || to.path === '/EditProfile') && !localStorage.getItem('userinfo')) {
         next({path: '/signin'})
     } else if ((to.path === '/signin' || to.path === '/signup') && localStorage.getItem('userinfo')) {
         next({path: '/'})

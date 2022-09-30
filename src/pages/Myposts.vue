@@ -10,7 +10,7 @@
         <div class="post-info">
           <img @click="delPost(mypost.id)" src="../assets/delete.svg" alt="" class="del-post">
           <img @click="editEnable(mypost.id)" src="../assets/edit.svg" alt="" class="edit-post">
-          <img :src="pic" alt="" class="user-img">
+          <img :src="pic ? pic : '/src/assets/avatars/default_avatar.svg'" alt="" class="user-img">
           <h2 class="user">{{ username }}</h2>
           <h3 class="date">{{ mypost.date }}</h3>
         </div>
@@ -37,12 +37,11 @@ import Post from "@/components/Post.vue";
 
 
 onMounted(() => {
-  setTimeout(() => {
-    myPostDataIn()
-  }, 100)
+  myPostDataIn();
 })
 const editing = ref(false)
 const editingId = ref(Number);
+const ispic = ref(false)
 
 const doneEditing = () => {
   editing.value = false;
