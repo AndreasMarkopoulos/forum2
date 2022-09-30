@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
     <!--    <div class="logo">O</div>-->
-    <div>
+    <div v-if="currRoute=='Homepage'|| currRoute=='SearchResults'">
       <img class="search-icon" src="../assets/search.svg" alt="">
-      <input type="text" class="search" placeholder="Search here..."/>
+      <input @keyup.enter="search" v-model="searchInput" type="text" class="search" placeholder="Search here..."/>
     </div>
     <router-link v-if="!nouser" to="/signin" class="sign-in">Sign In</router-link>
     <router-link v-if="nouser" to="/myposts" class="new-p">New Post</router-link>
@@ -18,10 +18,22 @@ import user from "@/components/User.vue";
 import {useUserStore} from "@/stores/UserStore";
 import {ref} from "vue";
 import {storeToRefs} from "pinia";
+import router from "@/routers";
+
+const searchInput = ref('')
+
+const search = async () => {
+  console.log(searchInput.value)
+  localStorage.setItem('search', searchInput.value)
+  await router.push({path: '/searchresults'})
+  if (currRoute.value == 'SearchResults') {
+    location.reload();
+  }
+}
 
 const emit = defineEmits(['newpost'])
 
-
+const currRoute = ref(router.currentRoute.value.name)
 const res = useUserStore();
 if (localStorage.getItem("userinfo")) {
   res.yesUser()

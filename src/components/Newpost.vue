@@ -32,9 +32,8 @@ const cancelChanges = () => {
 const submitPost = async () => {
   let username = JSON.parse(localStorage.getItem('userinfo'));
   let res = await axios.get(`http://localhost:3000/user?username=${username}`);
-  let pic = res.data[0].pic;
   let date = new Date().toLocaleDateString();
-  let edited = {user: res.data[0].id, pic, title: title.value, content: content.value, date}
+  let edited = {user: res.data[0].id, title: title.value, content: content.value, date}
   let result = await axios.post("http://localhost:3000/posts/", edited);
   title.value = '';
   content.value = '';

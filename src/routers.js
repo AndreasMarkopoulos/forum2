@@ -8,6 +8,7 @@ import myFeed from "@/pages/MyFeed.vue";
 import {useUserStore} from "@/stores/UserStore.js";
 import profile from "@/pages/Profile.vue";
 import editProfile from "@/pages/EditProfile.vue";
+import searchResults from "@/pages/SearchResults.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -53,7 +54,14 @@ const router = createRouter({
             component: profile,
             path: '/profile'
 
+        },
+        {
+            name: "SearchResults",
+            component: searchResults,
+            path: '/searchresults'
+
         }
+
 
     ]
 });
