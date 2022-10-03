@@ -2,7 +2,6 @@
   <div class="page">
     <Navbar/>
     <Sidebar/>
-
     <div class="postarea">
       <newpost v-if="!editing" @done="doneEditing"/>
       <post v-if="editing" :eId="editingId" @done="doneEditing"/>
@@ -17,12 +16,9 @@
         <div class="content">
           <h1 class="p-title">{{ mypost.title }}</h1>
           <p class="p-text">{{ mypost.content }}</p>
-
         </div>
       </ul>
-
     </div>
-
   </div>
 
 </template>
@@ -36,12 +32,13 @@ import axios from "axios";
 import Post from "@/components/Post.vue";
 
 
-onMounted(() => {
-  myPostDataIn();
+onMounted(async () => {
+  await myPostDataIn();
 })
 const editing = ref(false)
 const editingId = ref(Number);
 const ispic = ref(false)
+
 
 const doneEditing = () => {
   editing.value = false;
@@ -92,6 +89,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .postarea {
   padding-top: 30px;
   display: flex;
@@ -112,10 +111,55 @@ export default {
 
 }
 
+
 .content {
   color: #a19f9f;
   margin-top: 35px;
 }
+
+
+label {
+  font-size: 20px;
+  color: #22d09b;
+  position: absolute;
+  left: 50px;
+  top: 235px;
+}
+
+
+.user {
+  display: flex;
+  height: 80px;
+  width: 70%;
+  margin-left: 70px;
+
+}
+
+.user h1 {
+  letter-spacing: 1px;
+  position: absolute;
+  left: 220px;
+  margin-top: 30px;
+  color: #22d09b;
+}
+
+
+.usrnm input {
+
+  margin-left: 50px;
+  min-width: 300px;
+  padding: 10px;
+  border-radius: 3px;
+  display: block;
+  color: #a19f9f;
+  font-family: 'poppins', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 15px;
+  background-color: #2b2a2b;
+  border: none;
+}
+
 
 .p-title {
   font-size: 20px;
@@ -132,7 +176,7 @@ export default {
   position: absolute;
   top: 17px;
   font-weight: 500;
-  left: 70px;
+  left: 0px;
 }
 
 .date {
@@ -169,6 +213,10 @@ export default {
 
 h2 {
   text-transform: capitalize;
+}
+
+.posts {
+  width: 100%;
 }
 
 .post {

@@ -101,6 +101,7 @@ const dataIn = async () => {
             username: user.username,
             pic: user.pic
           })
+
     }
   }
   for (const post of posts.value) {

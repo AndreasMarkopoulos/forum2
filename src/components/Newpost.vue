@@ -106,6 +106,7 @@ h2 {
   height: fit-content;
 }
 
+
 textarea {
   color: #a19f9f;
   float: left;
@@ -131,18 +132,9 @@ textarea {
   margin-bottom: 30px;
 }
 
-/*.post {*/
-
-/*  letter-spacing: 1px;*/
-/*  padding: 20px 0 20px 0;*/
-/*  color: white;*/
-/*  font-family: 'poppins', sans-serif;*/
-/*  position: relative;*/
-/*  background-color: #232122;*/
-/*  width: 80%;*/
-/*  right: 0px;*/
-/*  height: 300px;*/
-/*  border-bottom: 2px solid #2b2a2b;*/
-/*}*/
-
+.button-1:hover {
+  background-color: #22d09b;
+  color: #232122;
+  box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.3);
+}
 </style>

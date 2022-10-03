@@ -4,13 +4,13 @@
   <div class="postarea">
     <div class="notfound" v-if="!foundId.length">No results found :(</div>
     <ul class="post" v-for="post in posts.slice().reverse()" :key="post.id">
-      <div class="posts" v-if="usersMap.get(post.user)?.uid!=myId && followIcon[post.id]=='/src/assets/following.svg'">
+      <div class="posts">
         <div class="post-info">
           <img src="" class="del-post" alt="">
           <img @click="goToProfile(usersMap.get(post.user).uid)"
-               :src="usersMap.get(post.user) ? usersMap.get(post.user)?.pic : '/src/assets/avatars/image-default.png'"
+               :src="usersMap.get(post.user) ? usersMap.get(post.user)?.pic : '/src/assets/avatars/default_avatar.svg'"
                alt="" class="user-img">
-          <img v-if="nouser && usersMap.get(post.user).uid!=myId" @click="follow(usersMap.get(post.user).uid,post.id)"
+          <img v-if="nouser && usersMap.get(post.user)?.uid!=myId" @click="follow(usersMap.get(post.user).uid,post.id)"
                class="follow"
                :src="followIcon[post.id]"
                alt="">
@@ -95,16 +95,16 @@ const dataIn = async () => {
   }
 
   const searchItem = ref(localStorage.getItem('search'))
-
   allPosts = (await axios.get(`http://localhost:3000/posts`)).data
   for (let i = 0; i < allPosts.length; i++) {
-    if (allPosts[i].content.toLowerCase().match(`${searchItem.value}`)) {
+    let lowercase = allPosts[i].content.toLowerCase()
+
+    if (lowercase.match(`${searchItem.value.toLowerCase()}`)) {
+
       foundId.push(i)
       posts.value.push(allPosts[i])
     }
   }
-  console.log(foundId)
-  console.log(posts.value)
   for (const post of posts.value) {
     const userId = post.user;
     if (!usersMap.has(userId)) {
@@ -165,14 +165,12 @@ export default {
 }
 
 .postarea {
-  padding-top: 75px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
-  background-color: #232122;;
-  margin-top: 60px;
+  background-color: #232122;
   margin-left: 5px;
   width: 85%;
   right: 0;

@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <div class="logo">O</div>
+    <div class="logo" @click="toHome">O</div>
     <ul class="options">
       <router-link class="subheader" to="/">Home</router-link>
       <router-link v-if="nouser" to="/myfeed" class="subheader">My Feed</router-link>
@@ -14,7 +14,11 @@
 import {ref} from "vue";
 import {useUserStore} from "@/stores/UserStore";
 import {storeToRefs} from "pinia";
+import router from "@/routers";
 
+const toHome = () => {
+  router.push({path: '/'})
+}
 
 const res = useUserStore();
 if (localStorage.getItem("userinfo")) {

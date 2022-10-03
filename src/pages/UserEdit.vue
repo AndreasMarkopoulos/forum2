@@ -55,11 +55,12 @@ const demote = async (id) => {
 }
 const delUser = async (id) => {
   let usr = await axios.get("http://localhost:3000/user/" + id);
-  await axios.delete("http://localhost:3000/user/" + id);
-  const userPosts = (await axios.get(`http://localhost:3000/posts?user=${usr.data.username}`)).data;
+  const userPosts = (await axios.get(`http://localhost:3000/posts?user=${id}`)).data;
   userPosts.forEach(post => {
-    axios.delete(`http://localhost:3000/posts/${post.id}`);
-  })
+        axios.delete(`http://localhost:3000/posts/${post.id}`);
+      }
+  )
+  await axios.delete("http://localhost:3000/user/" + id);
   await dataIn();
 }
 </script>

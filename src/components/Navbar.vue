@@ -1,6 +1,5 @@
 <template>
   <div class="nav">
-    <!--    <div class="logo">O</div>-->
     <div v-if="currRoute=='Homepage'|| currRoute=='SearchResults'">
       <img class="search-icon" src="../assets/search.svg" alt="">
       <input @keyup.enter="search" v-model="searchInput" type="text" class="search" placeholder="Search here..."/>
@@ -23,7 +22,6 @@ import router from "@/routers";
 const searchInput = ref('')
 
 const search = async () => {
-  console.log(searchInput.value)
   localStorage.setItem('search', searchInput.value)
   await router.push({path: '/searchresults'})
   if (currRoute.value == 'SearchResults') {
@@ -150,6 +148,12 @@ export default {
   -webkit-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.79);
   -moz-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.5);
   box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.1);
+}
+
+.new-p:hover {
+  background-color: #22d09b;
+  color: #232122;
+  box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.3);
 }
 
 .sign-in:hover {

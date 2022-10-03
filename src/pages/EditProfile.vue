@@ -15,6 +15,8 @@
     <h1 class="title3">Edit Description</h1>
     <textarea v-model="desc"></textarea>
     <div class="button-2" @click="changeDesc">Change</div>
+    <div class="too-long" v-if="tooLong">Description is too long</div>
+    <div class="success" v-if="success">Description Changed</div>
   </div>
 </template>
 
@@ -22,6 +24,8 @@
 import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 
+const success = ref(false);
+const tooLong = ref(false);
 const myId = ref();
 const user = ref('');
 const desc = ref()
@@ -39,7 +43,14 @@ for (let i = 0; i < 14; i++) {
 }
 
 const changeDesc = async () => {
-  await axios.patch(`http://localhost:3000/user/${myId.value}`, {description: desc.value})
+  if (desc.value.length < 800) {
+    await axios.patch(`http://localhost:3000/user/${myId.value}`, {description: desc.value})
+    tooLong.value = false;
+    success.value = true;
+  } else {
+    tooLong.value = true;
+    success.value = false;
+  }
 }
 
 const changeUsr = async () => {
@@ -113,6 +124,7 @@ h1 {
   box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.1);
 }
 
+
 textarea {
   font-family: 'poppins', sans-serif;
   font-weight: 500;
@@ -133,6 +145,20 @@ textarea {
   height: fit-content;
 }
 
+
+.success {
+  color: #22d09b;
+  position: absolute;
+  margin-top: 615px;
+  left: 430px;
+}
+
+.too-long {
+  color: indianred;
+  position: absolute;
+  margin-top: 615px;
+  left: 430px;
+}
 
 .img {
   border: 5px solid #232122;
@@ -210,5 +236,17 @@ textarea {
   width: 85%;
   right: 0;
   min-height: 100%;
+}
+
+.button-1:hover {
+  background-color: #22d09b;
+  color: #232122;
+  box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.3);
+}
+
+.button-2:hover {
+  background-color: #22d09b;
+  color: #232122;
+  box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.3);
 }
 </style>
