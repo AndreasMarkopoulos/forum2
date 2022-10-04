@@ -90,12 +90,6 @@ const logout = () => {
 
 </script>
 
-<!--<script>-->
-<!--export default {-->
-<!--  name: "User"-->
-<!--}-->
-<!--</script>-->
-
 <style scoped>
 
 

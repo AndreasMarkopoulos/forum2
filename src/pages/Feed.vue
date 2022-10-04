@@ -34,6 +34,9 @@ import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/UserStore";
 import {storeToRefs} from "pinia";
+import sidebar from "/src/components/Sidebar.vue";
+import navbar from "/src/components/Navbar.vue";
+import Post from "/src/components/Post.vue"
 import router from "@/routers";
 
 
@@ -119,18 +122,6 @@ const dataIn = async () => {
 
 </script>
 
-<script>
-import sidebar from "/src/components/Sidebar.vue";
-import navbar from "/src/components/Navbar.vue";
-import Post from "/src/components/Post.vue"
-
-export default {
-  name: "Postsfeed",
-  components: {
-    Post
-  }
-}
-</script>
 
 <style scoped>
 

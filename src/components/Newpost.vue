@@ -5,8 +5,6 @@
     <textarea v-model="content"
               placeholder="Write your post..."></textarea><br>
     <button class="button-1" @click="submitPost">Post</button>
-
-
   </div>
 </template>
 
@@ -31,13 +29,6 @@ const submitPost = async () => {
   emit('done');
 }
 
-</script>
-
-
-<script>
-export default {
-  name: "Newpost",
-}
 </script>
 
 <style scoped>

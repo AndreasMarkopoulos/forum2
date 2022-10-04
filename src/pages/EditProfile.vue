@@ -24,6 +24,8 @@
 import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/UserStore";
+import Sidebar from "../components/Sidebar.vue";
+import Navbar from "../components/Navbar.vue";
 
 const success = ref(false);
 const tooLong = ref(false);
@@ -71,16 +73,6 @@ const changeImg = async (id) => {
   store.setProfilePic(newpic)
 }
 </script>
-
-<script>
-import navbar from "@/components/Navbar.vue";
-import sidebar from "@/components/Sidebar.vue";
-
-export default {
-  name: "EditProfile"
-}
-</script>
-
 
 <style scoped>
 

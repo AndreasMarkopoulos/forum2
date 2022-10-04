@@ -66,12 +66,6 @@ const delUser = async (id) => {
 </script>
 
 
-<script>
-export default {
-  name: "UserEdit"
-}
-</script>
-
 <style scoped>
 
 .id {

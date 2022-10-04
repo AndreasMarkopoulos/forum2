@@ -143,16 +143,6 @@ const dataIn = async () => {
 
 </script>
 
-<script>
-import Post from "./Post.vue"
-
-export default {
-  name: "Postsfeed",
-  components: {
-    Post
-  }
-}
-</script>
 
 <style scoped>
 

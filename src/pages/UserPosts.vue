@@ -78,15 +78,6 @@ const myPostDataIn = async () => {
 
 </script>
 
-<script>
-
-export default {
-  name: "Myposts",
-  components: {},
-
-}
-</script>
-
 <style scoped>
 
 

@@ -14,6 +14,8 @@
 
 
 <script setup>
+import Navbar from "@/components/Navbar.vue";
+import Sidebar from "@/components/Sidebar.vue";
 import axios from "axios";
 import router from "@/routers.js";
 import {defineProps, ref} from "vue";
@@ -39,16 +41,6 @@ const signUp = async () => {
     localStorage.setItem("userinfo", JSON.stringify(usr.username));
     await router.push({path: '/'});
   }
-}
-</script>
-
-<script>
-import Navbar from "@/components/Navbar.vue";
-import Sidebar from "@/components/Sidebar.vue";
-
-export default {
-  name: "SignIn",
-  components: {Navbar, Sidebar}
 }
 </script>
 

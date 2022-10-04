@@ -46,13 +46,6 @@ const submitChanges = async () => {
 
 </script>
 
-
-<script>
-export default {
-  name: "Post",
-}
-</script>
-
 <style scoped>
 
 textarea:focus {
