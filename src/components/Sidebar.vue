@@ -3,8 +3,8 @@
     <div class="logo" @click="toHome">O</div>
     <ul class="options">
       <router-link class="subheader" to="/">Home</router-link>
-      <router-link v-if="nouser" to="/myfeed" class="subheader">My Feed</router-link>
-      <router-link v-if="nouser" to="/myposts" class="subheader">My Posts</router-link>
+      <router-link v-if="nouser" to="/feed" class="subheader">My Feed</router-link>
+      <router-link v-if="nouser" to="/userposts" class="subheader">My Posts</router-link>
 
     </ul>
   </div>

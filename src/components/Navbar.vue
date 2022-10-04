@@ -2,10 +2,11 @@
   <div class="nav">
     <div v-if="currRoute=='Homepage'|| currRoute=='SearchResults'">
       <img class="search-icon" src="../assets/search.svg" alt="">
-      <input @keyup.enter="search" v-model="searchInput" type="text" class="search" placeholder="Search here..."/>
+      <input @keyup.enter="search" v-model="searchInput" type="text" class="search"
+             placeholder="Search here..."/>
     </div>
     <router-link v-if="!nouser" to="/signin" class="sign-in">Sign In</router-link>
-    <router-link v-if="nouser" to="/myposts" class="new-p">New Post</router-link>
+    <router-link v-if="nouser" to="/userposts" class="new-p">New Post</router-link>
     <user/>
 
 
@@ -15,21 +16,15 @@
 <script setup>
 import user from "@/components/User.vue";
 import {useUserStore} from "@/stores/UserStore";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {storeToRefs} from "pinia";
 import router from "@/routers";
 
 const searchInput = ref('')
-
 const search = async () => {
-  localStorage.setItem('search', searchInput.value)
-  await router.push({path: '/searchresults'})
-  if (currRoute.value == 'SearchResults') {
-    location.reload();
-  }
+  await router.push({query: {search: `${searchInput.value}`}})
 }
 
-const emit = defineEmits(['newpost'])
 
 const currRoute = ref(router.currentRoute.value.name)
 const res = useUserStore();
@@ -43,31 +38,14 @@ const nouser = reactiveprops.user
 </script>
 
 <script>
+import {ref} from "vue";
+
 export default {
   name: "Navbar"
 }
 </script>
 
 <style scoped>
-
-.logout {
-  font-family: 'poppins', sans-serif;
-  font-size: 13px;
-  text-decoration: none;
-  position: absolute;
-  cursor: pointer;
-  top: 25%;
-  right: 130px;
-  background-color: rgb(0, 0, 0, 0);
-  border: 2px solid #22d09b;
-  color: #22d09b;
-  border-radius: 18px;
-  padding: 6px 16px;
-  letter-spacing: 1px;
-  -webkit-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.79);
-  -moz-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.5);
-  box-shadow: 0px 0px 12px 4px rgba(45, 255, 196, 0.1);
-}
 
 .search-icon {
   width: 17px;
@@ -179,6 +157,10 @@ export default {
   content: "../assets/search.svg";
 }
 
+input {
+  width: 148px;
+}
+
 input:hover {
   padding: 8px 0px 8px 28px;
   border: 2px solid #22d09b80 !important;
@@ -191,7 +173,8 @@ input:focus {
   outline: none !important;
   border: 2px solid #22d09b !important;
   border-radius: 20px;
-  padding: 8px 148px 8px 28px;
+  padding: 8px 28px 8px 28px;
+  width: 296px;
   -webkit-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.79);
   -moz-box-shadow: 0px 0px 42px 4px rgba(45, 255, 196, 0.79);
   box-shadow: 0px 0px 5px 4px inset rgba(45, 255, 196, 0.1);
@@ -200,19 +183,19 @@ input:focus {
 
 @keyframes expand {
   0% {
-    padding-right: 30px;
+    width: 178px;
   }
   25% {
-    padding-right: 60px;
+    width: 205px;
   }
   50% {
-    padding-right: 90px;
+    width: 238px;
   }
   75% {
-    padding-right: 120px;
+    width: 268px;
   }
   100% {
-    padding-right: 148px;
+    width: 296px;
   }
 }
 

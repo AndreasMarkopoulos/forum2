@@ -3,7 +3,7 @@
     <Navbar/>
     <Sidebar/>
     <div class="postarea">
-      <newpost v-if="!editing" @done="doneEditing"/>
+      <Newpost v-if="!editing" @done="doneEditing"/>
       <post v-if="editing" :eId="editingId" @done="doneEditing"/>
       <ul class="post" v-for="mypost in myposts.slice().reverse()" :key="mypost.id">
         <div class="post-info">

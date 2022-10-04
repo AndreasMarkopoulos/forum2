@@ -23,6 +23,7 @@
 <script setup>
 import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
+import {useUserStore} from "@/stores/UserStore";
 
 const success = ref(false);
 const tooLong = ref(false);
@@ -55,20 +56,19 @@ const changeDesc = async () => {
 
 const changeUsr = async () => {
   if (user) {
-
     let usr = await axios.patch(`http://localhost:3000/user/${myId.value}`, {username: user.value});
     localStorage.clear()
     localStorage.setItem('userinfo', JSON.stringify(user.value))
-    location.reload()
+    store.setUsername(user.value)
   }
 
 }
+const store = useUserStore();
 
 const changeImg = async (id) => {
-
   let newpic = `/src/assets/avatars/avatar (${id}).svg`
   await axios.patch(`http://localhost:3000/user/${myId.value}`, {pic: newpic});
-  location.reload()
+  store.setProfilePic(newpic)
 }
 </script>
 
@@ -192,7 +192,7 @@ textarea {
 }
 
 .img:hover {
-  border: 3px solid #22d09b;
+  background-color: #22d09b;
   border-radius: 30px;
 }
 

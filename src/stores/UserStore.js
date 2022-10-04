@@ -6,6 +6,8 @@ export const useUserStore = defineStore('userStore', {
         admin: Boolean,
         user: Boolean,
         profileUser: Number,
+        profilePic: String,
+        username: String,
     }),
     actions: {
         async checkAdmin() {
@@ -16,11 +18,12 @@ export const useUserStore = defineStore('userStore', {
                 return this.admin
             }
         },
-        getSelectedProfile() {
-            return this.profileUser
-        },
-        selectProfile(id) {
-            this.profileUser = id;
+        setProfilePic(value) {
+            this.profilePic = value;
+        }
+        ,
+        setUsername(value) {
+            this.username = value;
         }
         ,
         noUser() {
@@ -30,5 +33,6 @@ export const useUserStore = defineStore('userStore', {
             this.user = true;
         },
     },
+    getters: {}
 
 })

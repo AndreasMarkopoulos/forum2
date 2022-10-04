@@ -1,8 +1,8 @@
 <template>
   <div v-if="nouser" class="dropdown">
-    <div class="user" id="a" @mouseover="chbg1" @mouseleave="chbg2">
+    <div v-if="isLoaded" class="user" id="a" @mouseover="chbg1" @mouseleave="chbg2">
       <img :src="profPic ? profPic : '/src/assets/avatars/default_avatar.svg'" alt="">
-      <p>{{ username }}</p>
+      <p>{{ currentUser }}</p>
     </div>
     <div class="dropdown-content" id="b" @mouseover="chbg1" @mouseleave="chbg2">
       <div @click="toProfile" class="drop-option">Profile</div>
@@ -16,7 +16,7 @@
 
 <script setup>
 import {useUserStore} from "@/stores/UserStore";
-import {onBeforeMount, onMounted, ref} from "vue";
+import {onBeforeMount, onMounted, ref, watch} from "vue";
 import router from "@/routers.js";
 import {storeToRefs} from "pinia";
 import axios from "axios";
@@ -32,17 +32,25 @@ function chbg2() {
   document.getElementById('a').style.color = '#22d09b';
 }
 
-const currentUser = ref()
+const isLoaded = ref(false)
+const store = useUserStore()
+const currentUserId = ref()
 const res = useUserStore();
-const profPic = ref();
+const profPic = ref(store.profilePic);
 const reactiveprops = storeToRefs(res)
 const nouser = reactiveprops.user
+const currentUser = ref()
 let username = JSON.parse(localStorage.getItem("userinfo"));
 onMounted(async () => {
   if (username) {
     let res = await axios.get(`http://localhost:3000/user?username=${username}`);
-    profPic.value = res.data[0].pic
-    currentUser.value = res.data[0].id
+    // profPic.value = res.data[0].pic
+    currentUserId.value = res.data[0].id
+    store.setUsername(username)
+    store.setProfilePic(res.data[0].pic)
+    currentUser.value = store.username;
+    profPic.value = store.profilePic;
+    isLoaded.value = true;
   }
 })
 
@@ -51,9 +59,14 @@ const admin = reactiveprops.admin
 res.checkAdmin();
 // ADMIN
 
+watch(store.$state, (profilePic) => {
+  profPic.value = store.profilePic
+  currentUser.value = store.username
+}, {deep: true})
+
 
 const toProfile = () => {
-  let profileId = currentUser.value;
+  let profileId = currentUserId.value;
   localStorage.setItem('selectedProf', JSON.stringify(profileId));
   router.push({path: '/profile'})
   if (router.currentRoute.value.name == 'Profile') {

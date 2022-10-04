@@ -17,7 +17,7 @@ import axios from "axios";
 const props = defineProps({
   eId: {
     type: Number,
-    required: true
+    required: false
   }
 })
 const editTitle = ref('')

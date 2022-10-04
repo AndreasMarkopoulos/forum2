@@ -14,12 +14,7 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
-const props = defineProps({
-  eId: {
-    type: Number,
-    required: true
-  }
-})
+
 const title = ref('')
 const content = ref('')
 const user = JSON.parse(localStorage.getItem("userinfo"));

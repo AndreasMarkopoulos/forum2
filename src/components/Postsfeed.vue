@@ -25,31 +25,40 @@
 </template>
 
 <script setup>
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, reactive, ref, watch, watchEffect} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/UserStore";
 import {storeToRefs} from "pinia";
 import router from "@/routers";
+import {useRoute} from "vue-router";
 
 onMounted(() => {
   dataIn()
 
 })
+const route = useRoute()
+
+watch(() => route.query, () => {
+  dataIn()
+})
 
 
 const nouser = ref();
-
+const search = ref();
 let following = reactive([]);
 const posts = ref([]);
 const followIcon = reactive([])
 const usersMap = reactive(new Map())
 const myId = ref();
+let allPosts = reactive([])
+let foundId = reactive([])
 
 
 const goToProfile = (profileId) => {
   localStorage.setItem('selectedProf', JSON.stringify(profileId));
   router.push({path: "/profile"})
 }
+
 
 const follow = async (id, postId) => {
   if (!following.includes(id)) {
@@ -78,6 +87,24 @@ const follow = async (id, postId) => {
 }
 
 const dataIn = async () => {
+  posts.value = [];
+  if (route.query.search) {
+    const searchItem = ref(route.query.search)
+    search.value = searchItem.value
+    allPosts = (await axios.get(`http://localhost:3000/posts`)).data
+    for (let i = 0; i < allPosts.length; i++) {
+      let lowercase = allPosts[i].content.toLowerCase()
+      if (lowercase.match(`${searchItem.value.toLowerCase()}`)) {
+        foundId.push(i)
+        posts.value.push(allPosts[i])
+      }
+    }
+
+  } else {
+    let result = await axios.get('http://localhost:3000/posts/');
+    posts.value = result.data
+  }
+
   if (localStorage.getItem('userinfo')) {
     nouser.value = true;
   } else nouser.value = false;
@@ -89,8 +116,7 @@ const dataIn = async () => {
     myId.value = JSON.stringify(usr.data[0].id)
     following = usr.data[0].following
   }
-  let result = await axios.get('http://localhost:3000/posts/');
-  posts.value = result.data
+
   for (const post of posts.value) {
     const userId = post.user;
     if (!usersMap.has(userId)) {
