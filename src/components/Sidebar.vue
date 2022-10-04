@@ -3,8 +3,8 @@
     <div class="logo" @click="toHome">O</div>
     <ul class="options">
       <router-link class="subheader" to="/">Home</router-link>
-      <router-link v-if="nouser" to="/feed" class="subheader">My Feed</router-link>
-      <router-link v-if="nouser" to="/userposts" class="subheader">My Posts</router-link>
+      <router-link v-if="userIsLogged" to="/feed" class="subheader">My Feed</router-link>
+      <router-link v-if="userIsLogged" to="/userposts" class="subheader">My Posts</router-link>
 
     </ul>
   </div>
@@ -24,10 +24,10 @@ const res = useUserStore();
 if (localStorage.getItem("userinfo")) {
   res.yesUser()
 } else {
-  res.noUser()
+  res.userIsLogged()
 }
 const reactiveprops = storeToRefs(res)
-const nouser = reactiveprops.user
+const userIsLogged = reactiveprops.user
 
 
 </script>

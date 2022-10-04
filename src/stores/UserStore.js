@@ -26,7 +26,7 @@ export const useUserStore = defineStore('userStore', {
             this.username = value;
         }
         ,
-        noUser() {
+        userIsLogged() {
             this.user = false;
         },
         yesUser() {

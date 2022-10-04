@@ -14,22 +14,18 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
-
 const title = ref('')
 const content = ref('')
 const user = JSON.parse(localStorage.getItem("userinfo"));
 const emit = defineEmits(['done'])
 
-const cancelChanges = () => {
-  emit('done');
-}
 
 const submitPost = async () => {
   let username = JSON.parse(localStorage.getItem('userinfo'));
-  let res = await axios.get(`http://localhost:3000/user?username=${username}`);
+  let user = await axios.get(`http://localhost:3000/user?username=${username}`);
   let date = new Date().toLocaleDateString();
-  let edited = {user: res.data[0].id, title: title.value, content: content.value, date}
-  let result = await axios.post("http://localhost:3000/posts/", edited);
+  let edited = {user: user.data[0].id, title: title.value, content: content.value, date}
+  await axios.post("http://localhost:3000/posts/", edited);
   title.value = '';
   content.value = '';
   emit('done');

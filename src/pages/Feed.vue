@@ -9,7 +9,8 @@
           <img @click="goToProfile(usersMap.get(post.user).uid)"
                :src="usersMap.get(post.user) ? usersMap.get(post.user)?.pic : '/src/assets/avatars/image-default.png'"
                alt="" class="user-img">
-          <img v-if="nouser && usersMap.get(post.user).uid!=myId" @click="follow(usersMap.get(post.user).uid,post.id)"
+          <img v-if="userIsLogged && usersMap.get(post.user).uid!=myId"
+               @click="follow(usersMap.get(post.user).uid,post.id)"
                class="follow"
                :src="followIcon[post.id]"
                alt="">
@@ -41,7 +42,7 @@ onMounted(() => {
 
 })
 
-const nouser = ref();
+const userIsLogged = ref();
 
 let following = reactive([]);
 const posts = ref([]);
@@ -80,8 +81,8 @@ const follow = async (id, postId) => {
 
 const dataIn = async () => {
   if (localStorage.getItem('userinfo')) {
-    nouser.value = true;
-  } else nouser.value = false;
+    userIsLogged.value = true;
+  } else userIsLogged.value = false;
 
   let username = JSON.parse(localStorage.getItem('userinfo'));
 

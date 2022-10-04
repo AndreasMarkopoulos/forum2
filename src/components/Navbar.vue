@@ -5,8 +5,8 @@
       <input @keyup.enter="search" v-model="searchInput" type="text" class="search"
              placeholder="Search here..."/>
     </div>
-    <router-link v-if="!nouser" to="/signin" class="sign-in">Sign In</router-link>
-    <router-link v-if="nouser" to="/userposts" class="new-p">New Post</router-link>
+    <router-link v-if="!userIsLogged" to="/signin" class="sign-in">Sign In</router-link>
+    <router-link v-if="userIsLogged" to="/userposts" class="new-p">New Post</router-link>
     <user/>
 
 
@@ -21,20 +21,21 @@ import {storeToRefs} from "pinia";
 import router from "@/routers";
 
 const searchInput = ref('')
+
 const search = async () => {
   await router.push({query: {search: `${searchInput.value}`}})
 }
 
 
 const currRoute = ref(router.currentRoute.value.name)
-const res = useUserStore();
+const store = useUserStore();
 if (localStorage.getItem("userinfo")) {
-  res.yesUser()
+  store.yesUser()
 } else {
-  res.noUser()
+  store.userIsLogged()
 }
-const reactiveprops = storeToRefs(res)
-const nouser = reactiveprops.user
+const reactiveprops = storeToRefs(store)
+const userIsLogged = reactiveprops.user
 </script>
 
 <script>

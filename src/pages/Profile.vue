@@ -217,7 +217,7 @@ label {
   font-size: 16px;
   padding: 10px;
   background: #232122;
-  border-bottom: 2px solid #2b2a2b;
+  /*border-bottom: 2px solid #2b2a2b;*/
   width: 89%;
   min-height: 100px;
   height: fit-content;

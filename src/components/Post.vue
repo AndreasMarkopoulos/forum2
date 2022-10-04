@@ -20,15 +20,15 @@ const props = defineProps({
     required: false
   }
 })
-const editTitle = ref('')
-const editContent = ref('')
+const editedTitle = ref('')
+const editedContent = ref('')
 const editingId = ref('')
 
 onMounted(async () => {
   const post = await axios.get(`http://localhost:3000/posts/${props.eId}`)
   editingId.value = props.eId;
-  editTitle.value = post.data.title;
-  editContent.value = post.data.content;
+  editedTitle.value = post.data.title;
+  editedContent.value = post.data.content;
 })
 const emit = defineEmits(['done'])
 
@@ -37,7 +37,7 @@ const cancelChanges = () => {
 }
 
 const submitChanges = async () => {
-  let edited = {title: editTitle.value, content: editContent.value}
+  let edited = {title: editedTitle.value, content: editedContent.value}
   let result = await axios.patch("http://localhost:3000/posts/" + props.eId, edited);
   if (result.status == 200) {
     emit('done');

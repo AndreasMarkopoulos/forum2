@@ -1,5 +1,5 @@
 <template>
-  <div v-if="nouser" class="dropdown">
+  <div v-if="userIsLogged" class="dropdown">
     <div v-if="isLoaded" class="user" id="a" @mouseover="chbg1" @mouseleave="chbg2">
       <img :src="profPic ? profPic : '/src/assets/avatars/default_avatar.svg'" alt="">
       <p>{{ currentUser }}</p>
@@ -35,19 +35,17 @@ function chbg2() {
 const isLoaded = ref(false)
 const store = useUserStore()
 const currentUserId = ref()
-const res = useUserStore();
 const profPic = ref(store.profilePic);
-const reactiveprops = storeToRefs(res)
-const nouser = reactiveprops.user
+const reactiveprops = storeToRefs(store)
+const userIsLogged = reactiveprops.user
 const currentUser = ref()
 let username = JSON.parse(localStorage.getItem("userinfo"));
 onMounted(async () => {
   if (username) {
-    let res = await axios.get(`http://localhost:3000/user?username=${username}`);
-    // profPic.value = res.data[0].pic
-    currentUserId.value = res.data[0].id
+    let user = await axios.get(`http://localhost:3000/user?username=${username}`);
+    currentUserId.value = user.data[0].id
     store.setUsername(username)
-    store.setProfilePic(res.data[0].pic)
+    store.setProfilePic(user.data[0].pic)
     currentUser.value = store.username;
     profPic.value = store.profilePic;
     isLoaded.value = true;
@@ -56,7 +54,7 @@ onMounted(async () => {
 
 //ADMIN
 const admin = reactiveprops.admin
-res.checkAdmin();
+store.checkAdmin();
 // ADMIN
 
 watch(store.$state, (profilePic) => {
@@ -69,7 +67,7 @@ const toProfile = () => {
   let profileId = currentUserId.value;
   localStorage.setItem('selectedProf', JSON.stringify(profileId));
   router.push({path: '/profile'})
-  if (router.currentRoute.value.name == 'Profile') {
+  if (router.currentRoute.value.name === 'Profile') {
     location.reload()
   }
 }
@@ -84,7 +82,7 @@ const useredit = () => {
 
 const logout = () => {
   localStorage.removeItem('userinfo');
-  res.noUser();
+  store.userIsLogged();
   router.push({name: 'Homepage'})
   location.reload()
 }

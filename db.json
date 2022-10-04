@@ -9,6 +9,7 @@
       "id": 1,
       "followers": 3,
       "following": [
+        5,
         6,
         8
       ],
@@ -41,7 +42,7 @@
       "password": "1234",
       "admin": false,
       "id": 5,
-      "followers": 2,
+      "followers": 4,
       "description": "Hi, my name is Eleni and I am an Electrical Engineering student",
       "following": [
         6,

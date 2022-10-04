@@ -6,7 +6,8 @@
         <img @click="goToProfile(usersMap.get(post.user).uid)"
              :src="usersMap.get(post.user) ? usersMap.get(post.user).pic : '/src/assets/avatars/default_avatar.svg'"
              alt="" class="user-img">
-        <img v-if="nouser && usersMap.get(post.user)?.uid != myId" @click="follow(usersMap.get(post.user).uid,post.id)"
+        <img v-if="userIsLogged && usersMap.get(post.user)?.uid != myId"
+             @click="follow(usersMap.get(post.user).uid,post.id)"
              class="follow"
              :src="followIcon[post.id] ? followIcon[post.id] : '/src/assets/avatars/default_follow.svg' "
              alt="">
@@ -43,7 +44,7 @@ watch(() => route.query, () => {
 })
 
 
-const nouser = ref();
+const userIsLogged = ref();
 const search = ref();
 let following = reactive([]);
 const posts = ref([]);
@@ -82,7 +83,6 @@ const follow = async (id, postId) => {
     followIcon[postId] = '/src/assets/follow.svg'
   }
   await axios.patch(`http://localhost:3000/user/${myId.value}`, {following})
-
   await dataIn()
 }
 
@@ -106,8 +106,8 @@ const dataIn = async () => {
   }
 
   if (localStorage.getItem('userinfo')) {
-    nouser.value = true;
-  } else nouser.value = false;
+    userIsLogged.value = true;
+  } else userIsLogged.value = false;
 
   let username = JSON.parse(localStorage.getItem('userinfo'));
 

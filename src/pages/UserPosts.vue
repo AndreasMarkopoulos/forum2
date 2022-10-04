@@ -37,7 +37,6 @@ onMounted(async () => {
 })
 const editing = ref(false)
 const editingId = ref(Number);
-const ispic = ref(false)
 
 
 const doneEditing = () => {
@@ -66,9 +65,9 @@ const myPostDataIn = async () => {
   username.value = JSON.parse(usr);
   let uid = (await axios.get(`http://localhost:3000/user?username=${username.value}`)).data[0].id
   let result = await axios.get('http://localhost:3000/posts/');
-  for (let i = 0; i < result.data.length; i++)
-    if (result.data[i].user === uid) {
-      myposts.value.push(result.data[i]);
+  for (const element of result.data)
+    if (element.user === uid) {
+      myposts.value.push(element);
     }
 
   let usern = await axios.get(`http://localhost:3000/user?username=${username.value}`);

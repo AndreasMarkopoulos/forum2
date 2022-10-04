@@ -19,7 +19,7 @@ import {ref, defineProps} from "vue";
 import {useRouter, useRoute} from 'vue-router'
 
 const error = ref(false);
-const nouser = useUserStore();
+const userIsLogged = useUserStore();
 const router = useRouter()
 const route = useRoute()
 
@@ -34,18 +34,18 @@ const login = async () => {
 
   if (users.length === 0) {
     error.value = true;
-    nouser.noUser();
+    userIsLogged.userIsLogged();
     return;
   }
   const user = users[0];
 
   if (user.password === usr.password) {
-    nouser.yesUser();
+    userIsLogged.yesUser();
     localStorage.setItem("userinfo", JSON.stringify(usr.username));
     await router.push('/')
   } else {
     error.value = true;
-    nouser.noUser();
+    userIsLogged.userIsLogged();
   }
 }
 
