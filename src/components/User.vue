@@ -70,9 +70,9 @@ const useredit = () => {
 }
 
 const logout = () => {
-  localStorage.clear();
+  localStorage.removeItem('userinfo');
   res.noUser();
-  router.push({path: '/'})
+  router.push({name: 'Homepage'})
   location.reload()
 }
 

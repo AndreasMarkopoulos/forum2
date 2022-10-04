@@ -2,6 +2,7 @@
   <navbar/>
   <sidebar/>
   <div class="postarea">
+    <div class="caption">Results for "{{ search }}" :</div>
     <div class="notfound" v-if="!foundId.length">No results found :(</div>
     <ul class="post" v-for="post in posts.slice().reverse()" :key="post.id">
       <div class="posts">
@@ -43,7 +44,7 @@ onMounted(() => {
 })
 
 const nouser = ref();
-
+const search = ref();
 let following = reactive([]);
 const posts = ref([]);
 const followIcon = reactive([])
@@ -95,6 +96,7 @@ const dataIn = async () => {
   }
 
   const searchItem = ref(localStorage.getItem('search'))
+  search.value = searchItem.value
   allPosts = (await axios.get(`http://localhost:3000/posts`)).data
   for (let i = 0; i < allPosts.length; i++) {
     let lowercase = allPosts[i].content.toLowerCase()
@@ -147,13 +149,26 @@ export default {
 <style scoped>
 
 .notfound {
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
   position: absolute;
-  top: 70px;
+  top: 300px;
   color: indianred;
 }
 
 .posts {
   border-bottom: 2px solid #2b2a2b;
+}
+
+.caption {
+  width: 93%;
+  border-bottom: 2px solid #2b2a2b;
+  font-size: 25px;
+  color: #22d09b;
+  left: 60px;
+  top: 150px;
+  position: absolute;
 }
 
 .follow {
