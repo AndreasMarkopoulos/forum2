@@ -1,9 +1,9 @@
 <template>
   <div class="post">
     <h2>Make a new post :</h2>
-    <input v-model="title" class="tandp" type="text" id="Title" placeholder="Title (min: 2 characters)"><br>
+    <input v-model="title" class="tandp" type="text" id="Title" placeholder="Title"><br>
     <textarea v-model="content"
-              placeholder="Write your post... (min: 10 characters)"></textarea><br>
+              placeholder="Write your post..."></textarea><br>
     <button class="button-1" @click="submitPost">Post</button>
 
 
