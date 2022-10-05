@@ -39,10 +39,11 @@
 import Newpost from "../components/Newpost.vue";
 import Sidebar from "../components/Sidebar.vue";
 import Navbar from "../components/Navbar.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import Post from "@/components/Post.vue";
 import router from "@/routers";
+import {useRoute} from "vue-router";
 
 const myId = ref();
 const Id = ref();
@@ -52,15 +53,22 @@ const desc = ref()
 const followers = ref()
 const selProf = ref()
 const userId = ref()
+const route = useRoute()
+
+watch(() => route.query, () => {
+  dataIn()
+})
 
 onMounted(async () => {
-  selProf.value = localStorage.getItem('selectedProf')
-  await dataIn(JSON.parse(selProf.value));
-  await myPostDataIn();
+  setTimeout(async () => {
+    await dataIn(route.query.profile);
+    await myPostDataIn();
+  }, 100)
 })
 const editing = ref(false)
 const editingId = ref(Number);
 const ispic = ref(false)
+
 const dataIn = async (id) => {
   let myUsername = JSON.parse(localStorage.getItem('userinfo'));
   myId.value = (await axios.get(`http://localhost:3000/user?username=${myUsername}`)).data[0].id
@@ -70,7 +78,7 @@ const dataIn = async (id) => {
   Pic.value = res.data.pic
   followers.value = res.data.followers
   desc.value = res.data.description
-  selProf.value = JSON.parse(selProf.value)
+  selProf.value = route.query.profile
   window.scrollTo(0, 0);
 }
 
@@ -99,9 +107,10 @@ const editEnable = (id) => {
 const pic = ref();
 const username = ref("")
 const myposts = ref([]);
+
 const myPostDataIn = async () => {
   myposts.value.splice(null, myposts.value.length)
-  userId.value = JSON.parse(localStorage.getItem('selectedProf'));
+  userId.value = route.query.profile
   let result = await axios.get('http://localhost:3000/posts/');
   for (let i = 0; i < result.data.length; i++) {
     if (result.data[i].user === userId.value) {

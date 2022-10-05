@@ -55,9 +55,9 @@ let allPosts = reactive([])
 let foundId = reactive([])
 
 
-const goToProfile = (profileId) => {
-  localStorage.setItem('selectedProf', JSON.stringify(profileId));
-  router.push({path: "/profile"})
+const goToProfile = async (profileId) => {
+  await router.push({path: '/profile', query: {profile: `${profileId}`}})
+
 }
 
 
