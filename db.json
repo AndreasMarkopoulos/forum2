@@ -7,30 +7,20 @@
       "password": "1234",
       "admin": true,
       "id": 1,
-      "followers": 3,
+      "followers": 4,
       "following": [
-        5,
+        8,
         6,
-        8
+        5
       ],
       "description": "Hello my name is Andreas"
     },
     {
-      "pic": "/src/assets/user2.svg",
-      "username": "maria",
-      "email": "maria@email.com",
-      "password": "1234",
-      "admin": false,
-      "id": 3,
-      "followers": 0,
-      "following": []
-    },
-    {
-      "pic": "/src/assets/user4.svg",
+      "pic": "/src/assets/avatars/avatar (0).svg",
       "username": "giorgos",
       "email": "giorgos@email.com",
       "password": "1234",
-      "admin": false,
+      "admin": "true",
       "id": 4,
       "followers": 0,
       "following": []
@@ -42,7 +32,7 @@
       "password": "1234",
       "admin": false,
       "id": 5,
-      "followers": 4,
+      "followers": 5,
       "description": "Hi, my name is Eleni and I am an Electrical Engineering student",
       "following": [
         6,
@@ -60,14 +50,29 @@
       "following": []
     },
     {
-      "username": "kostas",
-      "email": "kostas",
+      "username": "maria",
+      "email": "maria@mail.com",
       "password": "1234",
       "admin": false,
-      "pic": "/src/assets/user1.svg",
       "followers": 0,
       "following": [],
-      "id": 7
+      "description": "",
+      "pic": "/src/assets/user1.svg",
+      "id": 8
+    },
+    {
+      "username": "mixalis",
+      "email": "mixalis@mail.com",
+      "password": "1234",
+      "admin": false,
+      "followers": 0,
+      "following": [
+        3,
+        1
+      ],
+      "description": "",
+      "pic": "/src/assets/avatars/avatar (8).svg",
+      "id": 9
     }
   ],
   "posts": [
@@ -98,6 +103,20 @@
       "content": "The European General Court reduced the European Commission's original fine slightly in Wednesday's final ruling on Google's appeal. It said this was to reflect \"the gravity and the duration\" of the infringement. \"The General Court largely confirms the Commission's decision that Google imposed unlawful restrictions on manufacturers of Android mobile devices and mobile network in order to consolidate the dominant position of its search engine,\" it said. A European Commission spokesperson said it will \"carefully study the judgement and decide on possible next steps\". The European Consumer Organisation, which represents a network of consumer groups across the EU, welcomed the ruling. Monique Goyens, its director general, said the ruling \"confirms that Europe's consumers must enjoy meaningful choice between search engines and browsers on their phones and tablets\". She said Google had deprived consumers of \"genuine choice\" over which search engines to use. \"If they preferred, for example, to use more innovative and privacy-friendly services, Google's restrictions prevented them from doing so.\" The court's ruling shores up the European Commission's efforts to clamp down on Big Tech, after anti-trust fines against Intel and Qualcomm were quashed by the European General Court earlier this year.",
       "date": "9/26/2022",
       "id": 12
+    },
+    {
+      "user": 9,
+      "title": "Biden’s AI Bill of Rights Is Toothless Against Big Tech",
+      "content": "LAST YEAR, THE White House Office of Science and Technology Policy (OSTP) announced that the US needed a bill of rights for the age of algorithms. Harms from artificial intelligence disproportionately impact marginalized communities, the office’s director and deputy director wrote in a WIRED op-ed, and so government guidance was needed to protect people against discriminatory or ineffective AI.\n\nToday, the OSTP released the Blueprint for an AI Bill of Rights, after gathering input from companies like Microsoft and Palantir as well as AI auditing startups, human rights groups, and the general public. Its five principles state that people have a right to control how their data is used, to opt out of automated decisionmaking, to live free from ineffective or unsafe algorithms, to know when AI is making a decision about them, and to not be discriminated against by unfair algorithms.\n\n“Technologies will come and go, but foundational liberties, rights, opportunities, and access need to be held open, and it’s the government’s job to help ensure that’s the case,” Alondra Nelson, OSTP deputy director for science and society, told WIRED. “This is the White House saying that workers, students, consumers, communities, everyone in this country should expect and demand better from our technologies.”",
+      "date": "10/5/2022",
+      "id": 14
+    },
+    {
+      "user": 4,
+      "title": "Elon Musk's Tesla Bot Isn't as Stupid as You Might Think",
+      "content": "When watching Tesla debut its humanoid Optimus robot at AI Day 2022, it's entirely fair to be skeptical about the company's grand plans. The robot's shuffling gait was plodding compared with the exciting parkour and flips of Boston Dynamics' Atlas, and Tesla has missed many deadlines bringing its full self-driving technology to its cars.\n\nBut I was at the AI Day event, and I'm here to warn you not to dismiss Tesla's sci-fi inspired vision.\n\nThe company revealed abundant evidence that it's thinking deeply about a bipedal robot and the artificial intelligence technology needed to make it useful. And much of Tesla's track record of genuine achievements in electric vehicle engineering and manufacturing apply to Optimus.\n\nNon-Tesla experts in robotics and AI I spoke with at the event were impressed with Optimus, the code name for the Tesla Bot. And Tesla engineers had the kind of fire in their bellies that bodes well for progress, especially when backed by Chief Executive Elon Musk's vision and Tesla's resources.",
+      "date": "10/5/2022",
+      "id": 15
     }
   ]
 }

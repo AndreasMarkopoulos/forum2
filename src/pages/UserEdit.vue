@@ -45,11 +45,11 @@ const dataIn = async () => {
 }
 
 const makeAdmin = async (id) => {
-  let result = await axios.patch("http://localhost:3000/user/" + id, {admin: 'true'});
+  await axios.patch("http://localhost:3000/user/" + id, {admin: 'true'});
   await dataIn();
 }
 const demote = async (id) => {
-  let result = await axios.patch("http://localhost:3000/user/" + id, {admin: 'false'});
+  await axios.patch("http://localhost:3000/user/" + id, {admin: 'false'});
   await dataIn();
 
 }
@@ -61,6 +61,7 @@ const delUser = async (id) => {
       }
   )
   await axios.delete("http://localhost:3000/user/" + id);
+  let allUsers = (await axios.get("http://localhost:3000/user")).data
   await dataIn();
 }
 </script>
